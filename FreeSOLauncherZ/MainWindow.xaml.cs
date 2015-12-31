@@ -30,6 +30,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
 using System.Threading;
+using System.Reflection;
+using System.Net;
 
 namespace FreeSOLauncher
 {
@@ -43,8 +45,10 @@ namespace FreeSOLauncher
         public MainWindow()
         {
             InitializeComponent();
-        }
+            WebMain.Navigate(new Uri("http://forum.freeso.org/threads/road-to-live-release.801/", UriKind.RelativeOrAbsolute));
 
+        }
+        
         /// <summary>
         /// If the process is not available, throw an error message.
         /// </summary>
@@ -74,5 +78,14 @@ namespace FreeSOLauncher
             MessageBox.Show("Coming soon", appTitle);
         }
 
+        private void LauncherNews_Click(object sender, RoutedEventArgs e)
+        {
+            WebMain.Navigate(new Uri("http://forum.freeso.org/threads/freesolauncherz.966/", UriKind.RelativeOrAbsolute));
+        }
+
+        private void FSONEws_Click(object sender, RoutedEventArgs e)
+        {
+            WebMain.Navigate(new Uri("http://forum.freeso.org/threads/road-to-live-release.801/", UriKind.RelativeOrAbsolute));
+        }
     }
 }

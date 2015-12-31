@@ -8,11 +8,11 @@
         Title="FreeSO" Height="333.488" Width="525"
         Background="#3263a8">
     <Grid>
-        <Button x:Name="Start" HorizontalAlignment="Left" Margin="10,258,0,0" VerticalAlignment="Top" Width="75" Height="20" Content="Start">
+        <Button x:Name="Start" HorizontalAlignment="Left" Margin="10,258,0,0" VerticalAlignment="Top" Width="75" Height="20" Content="Start" Click="Start_Click">
         </Button>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="419,257,0,0" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Width="83" Text="Launcher: v100"/>
         <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="436,273,0,0" Foreground="White" TextWrapping="Wrap" Text="Game: v196" VerticalAlignment="Top" Width="66"/>
-        <Button x:Name="button" Content="Update" HorizontalAlignment="Left" Margin="103,258,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="Update" Content="Update" HorizontalAlignment="Left" Margin="103,258,0,0" VerticalAlignment="Top" Width="75" Click="Update_Click"/>
         <WebBrowser HorizontalAlignment="Left" Height="242" Margin="10,10,0,0" VerticalAlignment="Top" Width="492"/>
 
     </Grid>

@@ -28,6 +28,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
+using System.Threading;
 
 namespace FreeSOLauncher
 {
@@ -36,11 +38,41 @@ namespace FreeSOLauncher
     /// </summary>
     public partial class MainWindow : Window
     {
+        public string appTitle = "FreeSO";
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// If the process is not available, throw an error message.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Start_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process.Start("FreeSO.exe");
+                Thread.Sleep(5000); // Wait 5 seconds before closing
+                Application.Current.Shutdown();
+            }
+            catch
+            {
+                MessageBox.Show("Place the launcher into the same directory as FreeSO.", appTitle + " not found");
+            }
+        }
+
+        /// <summary>
+        /// TODO: figure best way to download latest build
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Update_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Coming soon", appTitle);
+        }
 
     }
 }

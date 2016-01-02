@@ -6,13 +6,15 @@
         xmlns:local="clr-namespace:FreeSOLauncher"
         mc:Ignorable="d"
         Title="FreeSO" Height="583.702" Width="806.268"
-        Background="#3263a8">
+        Background="#3263a8"
+        ResizeMode="CanMinimize">
     <Grid>
-        <Button x:Name="Start" HorizontalAlignment="Left" Margin="10,511,0,0" VerticalAlignment="Top" Width="75" Height="20" Content="Start" Click="Start_Click">
+        <Button x:Name="Start" HorizontalAlignment="Left" Margin="10,511,0,0" VerticalAlignment="Top" Width="75" Height="20" Content="Play" Click="Start_Click">
         </Button>
         <WebBrowser x:Name="WebMain" HorizontalAlignment="Left" Height="496" Margin="10,10,0,0" VerticalAlignment="Top" Width="770"/>
         <Button x:Name="FSONEws" Content="FreeSO News" HorizontalAlignment="Left" Margin="682,511,0,0" VerticalAlignment="Top" Width="98" Click="FSONews_Click"/>
         <Button x:Name="LauncherNews" Content="Launcher News" HorizontalAlignment="Left" Margin="576,511,0,0" VerticalAlignment="Top" Width="101" Click="LauncherNews_Click"/>
+        <Button x:Name="StartIDE" Content="Develop" HorizontalAlignment="Left" Margin="90,511,0,0" VerticalAlignment="Top" Width="75" Click="StartIDE_Click"/>
 
     </Grid>
 </Window>

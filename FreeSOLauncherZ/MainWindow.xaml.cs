@@ -18,6 +18,8 @@ using System;
 using System.Windows;
 using System.Diagnostics;
 using System.Threading;
+using SysIO = System.IO;
+using System.Text;
 
 namespace FreeSOLauncher
 {
@@ -35,18 +37,45 @@ namespace FreeSOLauncher
 
         }
         
+        private void StartIDE_Click(object sender, RoutedEventArgs e)
+        {
+            StartFSO("FSO.IDE.exe");
+        }
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
+            StartFSO("FreeSO.exe");
+        }
+
+        /// <summary>
+        /// If FreeSO isn't found, alert 
+        /// </summary>
+        /// <param name="fso"></param>
+        private void StartFSO(string fso)
+        {
+            string notFoundTitle = "Not found";
+            string openAL3264 = @"C:\Program Files (x86)\OpenAL";
+            string openAL = @"C:\Program Files\OpenAL";
+
+            bool openALDir = SysIO.Directory.Exists(openAL3264) || SysIO.Directory.Exists(openAL);
+
             try
             {
-                Process.Start("FreeSO.exe");
-                Thread.Sleep(5000); // Wait 5 seconds before closing
-                Application.Current.Shutdown();
+                if (!openALDir)
+                {
+                    MessageBox.Show("OpenAL not found!\nGo to openal.org/downloads and get the Windows installer...", notFoundTitle);
+                }
+                else
+                {
+                    Process.Start(fso);
+                    Thread.Sleep(5000); // Wait 5 seconds before closing
+                    Application.Current.Shutdown();
+                }
+
             }
             catch
             {
-                MessageBox.Show("Place the launcher into the same directory as FreeSO.", appTitle + " not found");
+                MessageBox.Show("Could not detect FreeSO in this folder.", notFoundTitle);
             }
         }
 
@@ -66,5 +95,6 @@ namespace FreeSOLauncher
         {
             WebMain.Navigate(new Uri("http://forum.freeso.org/threads/road-to-live-release.801/", UriKind.RelativeOrAbsolute));
         }
+
     }
 }

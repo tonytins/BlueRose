@@ -1,6 +1,6 @@
 Name "FreeSOLauncherZ"
 
-Outfile "FreeSOLauncherZInst.exe"
+Outfile "FreeSOLauncherZ.exe"
 
 RequestExecutionLevel admin
 

@@ -48,7 +48,8 @@ namespace FreeSOLauncher
         }
 
         /// <summary>
-        /// If FreeSO isn't found, alert 
+        /// If FreeSO isn't found, alert the user.
+        /// If OpenAL isn't installed, show downloads address.
         /// </summary>
         /// <param name="fso"></param>
         private void StartFSO(string fso)

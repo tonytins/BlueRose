@@ -15,23 +15,9 @@
 //  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Diagnostics;
 using System.Threading;
-using System.Reflection;
-using System.Net;
 
 namespace FreeSOLauncher
 {
@@ -49,11 +35,7 @@ namespace FreeSOLauncher
 
         }
         
-        /// <summary>
-        /// If the process is not available, throw an error message.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void Start_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -68,11 +50,7 @@ namespace FreeSOLauncher
             }
         }
 
-        /// <summary>
-        /// TODO: figure best way to download latest build
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void Update_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Coming soon", appTitle);
@@ -83,7 +61,8 @@ namespace FreeSOLauncher
             WebMain.Navigate(new Uri("http://forum.freeso.org/threads/freesolauncherz.966/", UriKind.RelativeOrAbsolute));
         }
 
-        private void FSONEws_Click(object sender, RoutedEventArgs e)
+        
+        private void FSONews_Click(object sender, RoutedEventArgs e)
         {
             WebMain.Navigate(new Uri("http://forum.freeso.org/threads/road-to-live-release.801/", UriKind.RelativeOrAbsolute));
         }

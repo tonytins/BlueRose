@@ -34,7 +34,7 @@ namespace BlueRoseLauncher
         public MainWindow()
         {
             InitializeComponent();
-            WebMain.Navigate(new Uri(freeSONews, UriKind.RelativeOrAbsolute));
+            WebPage(freeSONews);
 
         }
         
@@ -91,13 +91,26 @@ namespace BlueRoseLauncher
 
         private void LauncherNews_Click(object sender, RoutedEventArgs e)
         {
-            WebMain.Navigate(new Uri("http://forum.freeso.org/threads/blue-rose-launcher.966/", UriKind.RelativeOrAbsolute));
+            WebPage("http://forum.freeso.org/threads/blue-rose-launcher.966/");
         }
 
         
         private void FSONews_Click(object sender, RoutedEventArgs e)
         {
-            WebMain.Navigate(new Uri(freeSONews, UriKind.RelativeOrAbsolute));
+            WebPage(freeSONews);
+        }
+
+        private void WebPage(string url)
+        {
+            try
+            {
+                WebMain.Navigate(new Uri(url, UriKind.RelativeOrAbsolute));
+            }
+            catch
+            {
+                MessageBox.Show("Page Not Found.");
+                WebMain.Navigate(new Uri("http://forum.freeso.org/", UriKind.RelativeOrAbsolute));
+            }
         }
 
     }

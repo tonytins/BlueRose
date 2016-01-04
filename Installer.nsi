@@ -1,6 +1,6 @@
-Name "FreeSOLauncherZ"
+Name "BlueRoseLauncher"
 
-Outfile "FreeSOLauncherZ.exe"
+Outfile "BlueRoseLauncher.exe"
 
 RequestExecutionLevel admin
 
@@ -13,34 +13,36 @@ Section "Main"
 
 	SetOutPath '$INSTDIR'
 
-	File "FreeSOLauncherZ\bin\Release\FreeSOLauncherZ.exe"
-	File "FreeSOLauncherZ\bin\Release\FreeSOLauncherZ.exe.config"
-	File "FreeSOLauncherZ\bin\Release\FreeSOLauncherZ.pdb"
+	File "BlueRose\bin\Release\BlueRoseLauncher.exe"
+	File "BlueRose\bin\Release\BlueRoseLauncher.exe.config"
+	File "BlueRose\bin\Release\BlueRoseLauncher.pdb"
 	
 	 # create the uninstaller
-    WriteUninstaller "$INSTDIR\Uninstall FreeSOLauncherZ.exe"
+    WriteUninstaller "$INSTDIR\Uninstall BlueRoseLauncher.exe"
 	
 	# create start menu shortcut
 	CreateDirectory "$SMPROGRAMS\FreeSO\"
-    CreateShortCut "$SMPROGRAMS\FreeSO\FreeSO.lnk" "$INSTDIR\FreeSOLauncherZ.exe"
-	CreateShortCut "$SMPROGRAMS\FreeSO\Uninstall FreeSOLauncherZ.lnk" "$INSTDIR\Uninstall FreeSOLauncherZ.exe"
+    CreateShortCut "$SMPROGRAMS\FreeSO\FreeSO.lnk" "$INSTDIR\BlueRoseLauncher.exe"
+	CreateShortCut "$SMPROGRAMS\FreeSO\Uninstall BlueRoseLauncher.lnk" "$INSTDIR\Uninstall BlueRoseLauncher.exe"
 
 	# create desktop shortcut
-  	CreateShortCut "$DESKTOP\FreeSO.lnk" "$INSTDIR\FreeSOLauncherZ.exe"
+  	CreateShortCut "$DESKTOP\FreeSO.lnk" "$INSTDIR\BlueRoseLauncher.exe"
 	
 SectionEnd
 
 
 Section "Uninstall"
  
-    # first, delete the uninstaller
-    Delete "$INSTDIR\Uninstall FreeSOLauncherZ.exe"
-	Delete "$INSTDIR\FreeSOLauncherZ.exe"
-	Delete "$INSTDIR\FreeSOLauncherZ.exe.config"
-	Delete "$INSTDIR\FreeSOLauncherZ.pdb"
+    # first, delete installed files
+    Delete "$INSTDIR\Uninstall BlueRoseLauncher.exe"
+	Delete "$INSTDIR\BlueRoseLauncher.exe"
+	Delete "$INSTDIR\BlueRoseLauncher.exe.config"
+	Delete "$INSTDIR\BlueRoseLauncher.pdb"
  
-    # second, remove the link from the start menu
+    # second, the shortcuts
     Delete "$DESKTOP\FreeSO.lnk"
-	Delete "$SMPROGRAMS\FreeSO\FreeSO.lnk" 
+	Delete "$SMPROGRAMS\FreeSO\FreeSO.lnk"
+	Delete "$SMPROGRAMS\FreeSO\Uninstall BlueRoseLauncher.lnk"
+	Delete "$SMPROGRAMS\FreeSO\"
  
 SectionEnd

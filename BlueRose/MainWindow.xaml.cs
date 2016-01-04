@@ -21,19 +21,20 @@ using System.Threading;
 using SysIO = System.IO;
 using System.Text;
 
-namespace FreeSOLauncher
+namespace BlueRoseLauncher
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        public string appTitle = "FreeSO";
+        public string appTitle = "Blue Rose";
+        public string freeSONews = "http://forum.freeso.org/threads/road-to-live-release.801/";
 
         public MainWindow()
         {
             InitializeComponent();
-            WebMain.Navigate(new Uri("http://forum.freeso.org/threads/road-to-live-release.801/", UriKind.RelativeOrAbsolute));
+            WebMain.Navigate(new Uri(freeSONews, UriKind.RelativeOrAbsolute));
 
         }
         
@@ -68,9 +69,11 @@ namespace FreeSOLauncher
                 }
                 else
                 {
-                    Process.Start(fso);
-                    Thread.Sleep(5000); // Wait 5 seconds before closing
-                    Application.Current.Shutdown();
+                    Process fsoProcess = new Process
+                    {
+                        StartInfo = new ProcessStartInfo(fso)
+                    };
+                    fsoProcess.Start();
                 }
 
             }
@@ -88,13 +91,13 @@ namespace FreeSOLauncher
 
         private void LauncherNews_Click(object sender, RoutedEventArgs e)
         {
-            WebMain.Navigate(new Uri("http://forum.freeso.org/threads/freesolauncherz.966/", UriKind.RelativeOrAbsolute));
+            WebMain.Navigate(new Uri("http://forum.freeso.org/threads/blue-rose-launcher.966/", UriKind.RelativeOrAbsolute));
         }
 
         
         private void FSONews_Click(object sender, RoutedEventArgs e)
         {
-            WebMain.Navigate(new Uri("http://forum.freeso.org/threads/road-to-live-release.801/", UriKind.RelativeOrAbsolute));
+            WebMain.Navigate(new Uri(freeSONews, UriKind.RelativeOrAbsolute));
         }
 
     }

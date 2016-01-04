@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeSOLauncherZ", "FreeSOLauncherZ\FreeSOLauncherZ.csproj", "{1B906B32-6266-4EA5-871A-7D98F23DD6D2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueRose", "BlueRose\BlueRose.csproj", "{1B906B32-6266-4EA5-871A-7D98F23DD6D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

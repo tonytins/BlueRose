@@ -99,9 +99,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="FreeSO.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Generic.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

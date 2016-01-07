@@ -13,9 +13,9 @@ Section "Main"
 
 	SetOutPath '$INSTDIR'
 
-	File "BlueRose\bin\Release\BlueRoseLauncher.exe"
-	File "BlueRose\bin\Release\BlueRoseLauncher.exe.config"
-	File "BlueRose\bin\Release\BlueRoseLauncher.pdb"
+	File "BlueRoseWinForms\bin\Release\BlueRoseLauncher.exe"
+	File "BlueRoseWinForms\bin\Release\BlueRoseLauncher.exe.config"
+	File "BlueRoseWinForms\bin\Release\BlueRoseLauncher.pdb"
 	
 	 # create the uninstaller
     WriteUninstaller "$INSTDIR\Uninstall BlueRoseLauncher.exe"

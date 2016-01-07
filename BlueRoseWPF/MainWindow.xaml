@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BlueRoseLauncher"
         mc:Ignorable="d"
-        Title="Blue Rose" Height="583.702" Width="806.268"
+        Title="Blue Rose" Height="583.702" Width="796.268"
         Background="#3263a8"
         ResizeMode="CanMinimize">
     <Grid>

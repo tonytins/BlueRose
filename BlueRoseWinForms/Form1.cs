@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Net;
 using System.Windows.Forms;
-using BlueRoseShared;
+using System.Diagnostics;
 
 namespace BlueRoseWinForms
 {
@@ -13,8 +13,16 @@ namespace BlueRoseWinForms
 
         public Form1()
         {
-            InitializeComponent();
-            WebPage(freeSONews);
+            try
+            {
+                InitializeComponent();
+
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+            
         }
 
         private void playBtn_Click(object sender, EventArgs e)
@@ -29,34 +37,31 @@ namespace BlueRoseWinForms
 
         private void brNewsBtn_Click(object sender, EventArgs e)
         {
-            WebPage("http://forum.freeso.org/threads/blue-rose-launcher.966/");
+            fsoWeb.Url = BlueRose.webPage("http://forum.freeso.org/threads/blue-rose-launcher.966/");
         }
 
         private void freeSONewsBtn_Click(object sender, EventArgs e)
         {
-            WebPage(freeSONews);
+            fsoWeb.Url = BlueRose.webPage(freeSONews);
         }
-
-        private void WebPage(string url)
-        {
-            try
-            {
-                fsoWeb.Navigate(new Uri(url, UriKind.RelativeOrAbsolute));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                fsoWeb.Navigate(new Uri("http://forum.freeso.org/", UriKind.RelativeOrAbsolute));
-            }
-        }
-
+        
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+#if (!DEBUG)
+            NotImplementedException notImp = new NotImplementedException();
+
+            MessageBox.Show(notImp.Message);
+#elif DEBUG
             WebClient client = new WebClient();
 
             try
@@ -64,7 +69,7 @@ namespace BlueRoseWinForms
                 client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(clDownProgChanged);
                 client.DownloadFileCompleted += new AsyncCompletedEventHandler(clDownFileCompleted);
 
-                client.DownloadFileAsync(new Uri("http://servo.freeso.org/repository/download/ProjectDollhouse_TsoClient/262:id/dist-196.zip"), Environment.CurrentDirectory);
+                client.DownloadFileAsync(BlueRose.webURL("http://servo.freeso.org/repository/download/ProjectDollhouse_TsoClient/262:id/dist-196.zip"), Environment.CurrentDirectory);
 
                 btnUpdate.Text = "Downloading";
                 btnUpdate.Enabled = false;
@@ -76,8 +81,8 @@ namespace BlueRoseWinForms
                 btnUpdate.Text = "ERROR";
                 btnUpdate.Enabled = false;
             }
+#endif
 
-            
         }
 
         void clDownProgChanged(object sender, DownloadProgressChangedEventArgs e)

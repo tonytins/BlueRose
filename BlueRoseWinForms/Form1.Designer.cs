@@ -33,14 +33,14 @@
             this.devBtn = new System.Windows.Forms.Button();
             this.freeSONewsBtn = new System.Windows.Forms.Button();
             this.brNewsBtn = new System.Windows.Forms.Button();
-            this.fsoWeb = new System.Windows.Forms.WebBrowser();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.dwnPrgBar = new System.Windows.Forms.ProgressBar();
+            this.fsoWeb = new System.Windows.Forms.WebBrowser();
             this.SuspendLayout();
             // 
             // playBtn
             // 
-            this.playBtn.Location = new System.Drawing.Point(12, 526);
+            this.playBtn.Location = new System.Drawing.Point(12, 425);
             this.playBtn.Name = "playBtn";
             this.playBtn.Size = new System.Drawing.Size(75, 23);
             this.playBtn.TabIndex = 0;
@@ -50,7 +50,7 @@
             // 
             // devBtn
             // 
-            this.devBtn.Location = new System.Drawing.Point(93, 526);
+            this.devBtn.Location = new System.Drawing.Point(93, 425);
             this.devBtn.Name = "devBtn";
             this.devBtn.Size = new System.Drawing.Size(75, 23);
             this.devBtn.TabIndex = 1;
@@ -60,7 +60,7 @@
             // 
             // freeSONewsBtn
             // 
-            this.freeSONewsBtn.Location = new System.Drawing.Point(678, 526);
+            this.freeSONewsBtn.Location = new System.Drawing.Point(578, 425);
             this.freeSONewsBtn.Name = "freeSONewsBtn";
             this.freeSONewsBtn.Size = new System.Drawing.Size(94, 23);
             this.freeSONewsBtn.TabIndex = 2;
@@ -70,7 +70,7 @@
             // 
             // brNewsBtn
             // 
-            this.brNewsBtn.Location = new System.Drawing.Point(563, 526);
+            this.brNewsBtn.Location = new System.Drawing.Point(464, 425);
             this.brNewsBtn.Name = "brNewsBtn";
             this.brNewsBtn.Size = new System.Drawing.Size(109, 23);
             this.brNewsBtn.TabIndex = 3;
@@ -78,17 +78,9 @@
             this.brNewsBtn.UseVisualStyleBackColor = true;
             this.brNewsBtn.Click += new System.EventHandler(this.brNewsBtn_Click);
             // 
-            // fsoWeb
-            // 
-            this.fsoWeb.Location = new System.Drawing.Point(12, 12);
-            this.fsoWeb.MinimumSize = new System.Drawing.Size(20, 20);
-            this.fsoWeb.Name = "fsoWeb";
-            this.fsoWeb.Size = new System.Drawing.Size(760, 508);
-            this.fsoWeb.TabIndex = 4;
-            // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(174, 526);
+            this.btnUpdate.Location = new System.Drawing.Point(174, 425);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.TabIndex = 5;
@@ -98,22 +90,31 @@
             // 
             // dwnPrgBar
             // 
-            this.dwnPrgBar.Location = new System.Drawing.Point(255, 526);
+            this.dwnPrgBar.Location = new System.Drawing.Point(12, 396);
             this.dwnPrgBar.Name = "dwnPrgBar";
-            this.dwnPrgBar.Size = new System.Drawing.Size(302, 23);
+            this.dwnPrgBar.Size = new System.Drawing.Size(660, 23);
             this.dwnPrgBar.TabIndex = 6;
             this.dwnPrgBar.Click += new System.EventHandler(this.dwnPrgBar_Click);
+            // 
+            // fsoWeb
+            // 
+            this.fsoWeb.Location = new System.Drawing.Point(13, 12);
+            this.fsoWeb.MinimumSize = new System.Drawing.Size(20, 20);
+            this.fsoWeb.Name = "fsoWeb";
+            this.fsoWeb.Size = new System.Drawing.Size(659, 378);
+            this.fsoWeb.TabIndex = 7;
+            this.fsoWeb.Url = new System.Uri("http://forum.freeso.org/", System.UriKind.Absolute);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(99)))), ((int)(((byte)(168)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(121)))), ((int)(((byte)(186)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.ClientSize = new System.Drawing.Size(684, 461);
+            this.Controls.Add(this.fsoWeb);
             this.Controls.Add(this.dwnPrgBar);
             this.Controls.Add(this.btnUpdate);
-            this.Controls.Add(this.fsoWeb);
             this.Controls.Add(this.brNewsBtn);
             this.Controls.Add(this.freeSONewsBtn);
             this.Controls.Add(this.devBtn);
@@ -136,9 +137,9 @@
         private System.Windows.Forms.Button devBtn;
         private System.Windows.Forms.Button freeSONewsBtn;
         private System.Windows.Forms.Button brNewsBtn;
-        private System.Windows.Forms.WebBrowser fsoWeb;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.ProgressBar dwnPrgBar;
+        private System.Windows.Forms.WebBrowser fsoWeb;
     }
 }
 

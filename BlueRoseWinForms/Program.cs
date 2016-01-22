@@ -14,10 +14,10 @@ namespace BlueRoseWinForms
         [STAThread]
         static void Main(string[] args)
         {
+            BlueRose.fsoParmas = args;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
-            BlueRose.fsoParmas = args;
         }
     }
 }

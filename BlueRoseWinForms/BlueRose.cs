@@ -99,7 +99,9 @@ namespace BlueRoseWinForms
                 {
                     Process fsoProcess = new Process();
                     fsoProcess.StartInfo.FileName = fso;
+#if DEBUG
                     fsoProcess.StartInfo.Arguments = fsoParmas[0];
+#endif
                     fsoProcess.Start();
                 }
 

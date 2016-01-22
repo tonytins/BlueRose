@@ -8,8 +8,10 @@ using System.Net;
 
 namespace BlueRoseWinForms
 {
-    public class BlueRose : Form1
+    public class BlueRose
     {
+
+        public static string[] fsoParmas { get; set; }
 
         /// <summary>
         /// Returns a given URL. If it isn't there,
@@ -95,18 +97,16 @@ namespace BlueRoseWinForms
                 }
                 else
                 {
-                    Process fsoProcess = new Process
-                    {
-                        StartInfo = new ProcessStartInfo(fso)
-                    };
-
+                    Process fsoProcess = new Process();
+                    fsoProcess.StartInfo.FileName = fso;
+                    fsoProcess.StartInfo.Arguments = fsoParmas[0];
                     fsoProcess.Start();
                 }
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, fso + " not found.");
+                MessageBox.Show(ex.Message, fso);
             }
         }
     }

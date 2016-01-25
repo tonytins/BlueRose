@@ -4,6 +4,7 @@ using System.Net;
 using System.Windows.Forms;
 using Ionic.Zip;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace BlueRoseWinForms
 {
@@ -95,9 +96,6 @@ namespace BlueRoseWinForms
         void clientDownFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
 
-            btnUpdate.Text = "Update";
-            btnUpdate.Enabled = true;
-
             // http://www.codeproject.com/Articles/11556/Converting-Wildcards-to-Regexes
             // ---------------------------------------------------
 
@@ -107,7 +105,7 @@ namespace BlueRoseWinForms
             // Get a list of files in the My Documents folder
             string[] files = System.IO.Directory.GetFiles(Environment.CurrentDirectory);
 
-            foreach(string file in files)
+            foreach (string file in files)
             {
                 if (wildZip.IsMatch(file))
                 {
@@ -117,21 +115,14 @@ namespace BlueRoseWinForms
                         {
                             foreach (ZipEntry ex in zip)
                             {
-
                                 btnUpdate.Text = "Unpacking";
                                 ex.Extract(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
-
-                                foreach(var allFiles in files)
-                                {
-                                    if(wildCard.IsMatch(allFiles))
-                                    {
-                                        devBtn.Enabled = true;
-                                        playBtn.Enabled = true;
-                                        btnUpdate.Text = "Update";
-                                        btnUpdate.Enabled = true;
-                                    }
-                                }
                             }
+
+                            devBtn.Enabled = true;
+                            playBtn.Enabled = true;
+                            btnUpdate.Text = "Update";
+                            btnUpdate.Enabled = true;
                         }
                     }
                     catch (Exception ex)
@@ -142,6 +133,11 @@ namespace BlueRoseWinForms
             }
 
             // ---------------------------------------------------
+
+            devBtn.Enabled = true;
+            playBtn.Enabled = true;
+            btnUpdate.Text = "Update";
+            btnUpdate.Enabled = true;
 
             BlueRose.garbageCollection();
 

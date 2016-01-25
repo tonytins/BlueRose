@@ -123,6 +123,7 @@ namespace BlueRoseWinForms
                             playBtn.Enabled = true;
                             btnUpdate.Text = "Update";
                             btnUpdate.Enabled = true;
+                            dwnPrgBar.Value = 0;
                         }
                     }
                     catch (Exception ex)

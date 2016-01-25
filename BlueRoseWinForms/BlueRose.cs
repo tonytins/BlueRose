@@ -4,7 +4,6 @@ using SysIO = System.IO;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using System.Net;
 
 namespace BlueRoseWinForms
 {
@@ -99,9 +98,6 @@ namespace BlueRoseWinForms
                 {
                     Process fsoProcess = new Process();
                     fsoProcess.StartInfo.FileName = fso;
-#if DEBUG
-                    fsoProcess.StartInfo.Arguments = fsoParmas[0];
-#endif
                     fsoProcess.Start();
                 }
 
@@ -110,6 +106,26 @@ namespace BlueRoseWinForms
             {
                 MessageBox.Show(ex.Message, fso);
             }
+        }
+
+        /// <summary>
+        /// Returns downloadArtifacts.html and then the zip file
+        /// </summary>
+        /// <returns>file</returns>
+        public static string dlFile()
+        {
+            Uri uri = new Uri(@"http://servo.freeso.org/guestAuth/downloadArtifacts.html?buildTypeId=ProjectDollhouse_TsoClient&buildId=lastSuccessful");
+            string file = SysIO.Path.GetFileName(uri.LocalPath);
+            return file;
+        }
+
+        /// <summary>
+        /// Deletes downloadArtifacts.html
+        /// </summary>
+        public static void garbageCollection()
+        {
+            if (SysIO.File.Exists(dlFile()))
+                SysIO.File.Delete(dlFile());
         }
     }
 }

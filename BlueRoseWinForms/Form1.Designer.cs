@@ -82,7 +82,7 @@
             // 
             this.btnUpdate.Location = new System.Drawing.Point(174, 425);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdate.Size = new System.Drawing.Size(88, 23);
             this.btnUpdate.TabIndex = 5;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -90,9 +90,9 @@
             // 
             // dwnPrgBar
             // 
-            this.dwnPrgBar.Location = new System.Drawing.Point(12, 396);
+            this.dwnPrgBar.Location = new System.Drawing.Point(268, 425);
             this.dwnPrgBar.Name = "dwnPrgBar";
-            this.dwnPrgBar.Size = new System.Drawing.Size(660, 23);
+            this.dwnPrgBar.Size = new System.Drawing.Size(190, 23);
             this.dwnPrgBar.TabIndex = 6;
             this.dwnPrgBar.Click += new System.EventHandler(this.dwnPrgBar_Click);
             // 
@@ -101,7 +101,7 @@
             this.fsoWeb.Location = new System.Drawing.Point(13, 12);
             this.fsoWeb.MinimumSize = new System.Drawing.Size(20, 20);
             this.fsoWeb.Name = "fsoWeb";
-            this.fsoWeb.Size = new System.Drawing.Size(659, 378);
+            this.fsoWeb.Size = new System.Drawing.Size(659, 407);
             this.fsoWeb.TabIndex = 7;
             this.fsoWeb.Url = new System.Uri("http://forum.freeso.org/", System.UriKind.Absolute);
             // 

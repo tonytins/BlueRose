@@ -16,6 +16,8 @@ Section "Main"
 	File "BlueRoseWinForms\bin\Debug\BlueRoseLauncher.exe"
 	File "BlueRoseWinForms\bin\Debug\BlueRoseLauncher.exe.config"
 	File "BlueRoseWinForms\bin\Debug\BlueRoseLauncher.pdb"
+	File "BlueRoseWinForms\bin\Debug\Ionic.Zip.dll"
+	File "BlueRoseWinForms\bin\Debug\Ionic.Zip.xml"
 	
 	 # create the uninstaller
     WriteUninstaller "$INSTDIR\Uninstall BlueRoseLauncher.exe"

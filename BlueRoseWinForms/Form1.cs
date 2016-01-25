@@ -2,6 +2,8 @@
 using System.ComponentModel;
 using System.Net;
 using System.Windows.Forms;
+using Ionic.Zip;
+using System.Text.RegularExpressions;
 
 namespace BlueRoseWinForms
 {
@@ -9,6 +11,9 @@ namespace BlueRoseWinForms
     {
 
         public string freeSONews = "http://forum.freeso.org/threads/road-to-live-release.801/";
+        private string errorBtn = "ERROR";
+        WebClient client = new WebClient();
+        Uri dlAddress = new Uri(@"http://servo.freeso.org/guestAuth/downloadArtifacts.html?buildTypeId=ProjectDollhouse_TsoClient&buildId=lastSuccessful");
 
         public Form1()
         {
@@ -20,7 +25,6 @@ namespace BlueRoseWinForms
             {
                 MessageBox.Show(ex.Message);
             }
-            
             
         }
 
@@ -46,7 +50,7 @@ namespace BlueRoseWinForms
         
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         /// <summary>
@@ -56,47 +60,91 @@ namespace BlueRoseWinForms
         /// <param name="e"></param>
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-#if (!DEBUG)
-            NotImplementedException notImp = new NotImplementedException();
-
-            MessageBox.Show(notImp.Message);
-#elif DEBUG
-            WebClient client = new WebClient();
-
             try
             {
-                client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(clDownProgChanged);
-                client.DownloadFileCompleted += new AsyncCompletedEventHandler(clDownFileCompleted);
+                BlueRose.garbageCollection();
 
-                client.DownloadFileAsync(BlueRose.webURL("http://servo.freeso.org/repository/download/ProjectDollhouse_TsoClient/262:id/dist-196.zip"), Environment.CurrentDirectory);
+                client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(clientDownProgChanged);
+                client.DownloadFileCompleted += new AsyncCompletedEventHandler(clientDownFileCompleted);
+
+                client.DownloadFileAsync(dlAddress, BlueRose.dlFile());
 
                 btnUpdate.Text = "Downloading";
                 btnUpdate.Enabled = false;
+                devBtn.Enabled = false;
+                playBtn.Enabled = false;
+
             }
             catch (Exception ex)
             {
+#if DEBUG
                 MessageBox.Show(ex.Message);
-
-                btnUpdate.Text = "ERROR";
+#endif
+                btnUpdate.Text = errorBtn;
                 btnUpdate.Enabled = false;
             }
-#endif
-
+            
+            
         }
 
-        void clDownProgChanged(object sender, DownloadProgressChangedEventArgs e)
+        void clientDownProgChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            double bytesIn = double.Parse(e.BytesReceived.ToString());
-            double totalBytes = double.Parse(e.TotalBytesToReceive.ToString());
-            double percentage = bytesIn / totalBytes * 100;
-
-            dwnPrgBar.Value = int.Parse(Math.Truncate(percentage).ToString());
+            dwnPrgBar.Value = e.ProgressPercentage;
         }
 
-        void clDownFileCompleted(object sender, AsyncCompletedEventArgs e)
+        void clientDownFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
+
             btnUpdate.Text = "Update";
             btnUpdate.Enabled = true;
+
+            // http://www.codeproject.com/Articles/11556/Converting-Wildcards-to-Regexes
+            // ---------------------------------------------------
+
+            Wildcard wildZip = new Wildcard("*.zip", RegexOptions.IgnoreCase);
+            Wildcard wildCard = new Wildcard("*.*", RegexOptions.IgnoreCase);
+
+            // Get a list of files in the My Documents folder
+            string[] files = System.IO.Directory.GetFiles(Environment.CurrentDirectory);
+
+            foreach(string file in files)
+            {
+                if (wildZip.IsMatch(file))
+                {
+                    try
+                    {
+                        using (ZipFile zip = ZipFile.Read(file))
+                        {
+                            foreach (ZipEntry ex in zip)
+                            {
+
+                                btnUpdate.Text = "Unpacking";
+                                ex.Extract(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
+
+                                foreach(var allFiles in files)
+                                {
+                                    if(wildCard.IsMatch(allFiles))
+                                    {
+                                        devBtn.Enabled = true;
+                                        playBtn.Enabled = true;
+                                        btnUpdate.Text = "Update";
+                                        btnUpdate.Enabled = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+
+            // ---------------------------------------------------
+
+            BlueRose.garbageCollection();
+
         }
 
         private void dwnPrgBar_Click(object sender, EventArgs e)

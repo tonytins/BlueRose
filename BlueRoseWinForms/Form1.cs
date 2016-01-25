@@ -4,7 +4,6 @@ using System.Net;
 using System.Windows.Forms;
 using Ionic.Zip;
 using System.Text.RegularExpressions;
-using System.Threading;
 
 namespace BlueRoseWinForms
 {
@@ -51,7 +50,7 @@ namespace BlueRoseWinForms
         
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            BlueRose.GC();
         }
 
         /// <summary>
@@ -63,12 +62,13 @@ namespace BlueRoseWinForms
         {
             try
             {
-                BlueRose.garbageCollection();
+                BlueRose.GC();
 
                 client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(clientDownProgChanged);
                 client.DownloadFileCompleted += new AsyncCompletedEventHandler(clientDownFileCompleted);
 
-                client.DownloadFileAsync(dlAddress, BlueRose.dlFile());
+                client.DownloadFileAsync(BlueRose.dlAddress("servo.freeso.org", "ProjectDollhouse_TsoClient"),
+                    "freeso.zip");
 
                 btnUpdate.Text = "Downloading";
                 btnUpdate.Enabled = false;
@@ -95,52 +95,49 @@ namespace BlueRoseWinForms
 
         void clientDownFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
+            btnUpdate.Text = "Unpacking";
+
+            string firstUnpack = "freeso.zip";
+
+            using (ZipFile buildUnpack = ZipFile.Read(firstUnpack))
+            {
+                foreach (ZipEntry ex in buildUnpack)
+                {
+
+                    ex.Extract(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
+                }
+            }
+
 
             // http://www.codeproject.com/Articles/11556/Converting-Wildcards-to-Regexes
             // ---------------------------------------------------
 
-            Wildcard wildZip = new Wildcard("*.zip", RegexOptions.IgnoreCase);
-            Wildcard wildCard = new Wildcard("*.*", RegexOptions.IgnoreCase);
+            Wildcard secondUnpack = new Wildcard("*.zip", RegexOptions.IgnoreCase);
 
             // Get a list of files in the My Documents folder
             string[] files = System.IO.Directory.GetFiles(Environment.CurrentDirectory);
 
-            foreach (string file in files)
+            foreach (string freeSOInstall in files)
             {
-                if (wildZip.IsMatch(file))
+                if (secondUnpack.IsMatch(freeSOInstall))
                 {
-                    try
+                    using (ZipFile zip2 = ZipFile.Read(freeSOInstall))
                     {
-                        using (ZipFile zip = ZipFile.Read(file))
+                        foreach (ZipEntry ex in zip2)
                         {
-                            foreach (ZipEntry ex in zip)
-                            {
-                                btnUpdate.Text = "Unpacking";
-                                ex.Extract(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
-                            }
-
-                            devBtn.Enabled = true;
-                            playBtn.Enabled = true;
-                            btnUpdate.Text = "Update";
-                            btnUpdate.Enabled = true;
-                            dwnPrgBar.Value = 0;
+                            ex.Extract(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
                     }
                 }
             }
 
-            // ---------------------------------------------------
-
-            devBtn.Enabled = true;
-            playBtn.Enabled = true;
             btnUpdate.Text = "Update";
             btnUpdate.Enabled = true;
+            devBtn.Enabled = true;
+            playBtn.Enabled = true;
+            dwnPrgBar.Value = 0;
 
-            BlueRose.garbageCollection();
+            // ---------------------------------------------------
 
         }
 

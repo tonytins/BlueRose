@@ -1,6 +1,6 @@
 Name "BlueRoseLauncher"
 
-Outfile "BlueRoseLauncher Debug.exe"
+Outfile "BlueRoseBeta.exe"
 
 RequestExecutionLevel admin
 

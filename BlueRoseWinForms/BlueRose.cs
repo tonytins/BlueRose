@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.Text.RegularExpressions;
+using Ionic.Zip;
 
 namespace BlueRoseWinForms
 {
@@ -131,6 +132,10 @@ namespace BlueRoseWinForms
         public static void GC()
         {
             string htmlOutput = "downloadArtifacts.html";
+            string brInstaller = "BlueRoseInstaller.exe";
+
+            if (SysIO.File.Exists(brInstaller))
+                SysIO.File.Delete(brInstaller);
 
             if (SysIO.File.Exists(htmlOutput))
                 SysIO.File.Delete(htmlOutput);
@@ -143,6 +148,31 @@ namespace BlueRoseWinForms
                 if (wildZip.IsMatch(file))
                 {
                     SysIO.File.Delete(file);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Detects for any present zips and unpacks them.
+        /// </summary>
+        public static void wildZip()
+        {
+            Wildcard secondUnpack = new Wildcard("*.zip", RegexOptions.IgnoreCase);
+
+            // Get a list of files in the My Documents folder
+            string[] files = SysIO.Directory.GetFiles(Environment.CurrentDirectory);
+
+            foreach (string file in files)
+            {
+                if (secondUnpack.IsMatch(file))
+                {
+                    using (ZipFile zip2 = ZipFile.Read(file))
+                    {
+                        foreach (ZipEntry ex in zip2)
+                        {
+                            ex.Extract(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
+                        }
+                    }
                 }
             }
         }

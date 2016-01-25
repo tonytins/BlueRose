@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Net;
 using System.Windows.Forms;
 using Ionic.Zip;
-using System.Text.RegularExpressions;
 
 namespace BlueRoseWinForms
 {
@@ -63,9 +62,8 @@ namespace BlueRoseWinForms
             try
             {
                 BlueRose.GC();
-
-                client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(clientDownProgChanged);
-                client.DownloadFileCompleted += new AsyncCompletedEventHandler(clientDownFileCompleted);
+                
+                client.DownloadFileCompleted += new AsyncCompletedEventHandler(freeSODownloadCompleted);
 
                 client.DownloadFileAsync(BlueRose.dlAddress("servo.freeso.org", "ProjectDollhouse_TsoClient"),
                     "freeso.zip");
@@ -88,12 +86,7 @@ namespace BlueRoseWinForms
             
         }
 
-        void clientDownProgChanged(object sender, DownloadProgressChangedEventArgs e)
-        {
-            dwnPrgBar.Value = e.ProgressPercentage;
-        }
-
-        void clientDownFileCompleted(object sender, AsyncCompletedEventArgs e)
+        void freeSODownloadCompleted(object sender, AsyncCompletedEventArgs e)
         {
             btnUpdate.Text = "Unpacking";
 
@@ -112,30 +105,12 @@ namespace BlueRoseWinForms
             // http://www.codeproject.com/Articles/11556/Converting-Wildcards-to-Regexes
             // ---------------------------------------------------
 
-            Wildcard secondUnpack = new Wildcard("*.zip", RegexOptions.IgnoreCase);
-
-            // Get a list of files in the My Documents folder
-            string[] files = System.IO.Directory.GetFiles(Environment.CurrentDirectory);
-
-            foreach (string freeSOInstall in files)
-            {
-                if (secondUnpack.IsMatch(freeSOInstall))
-                {
-                    using (ZipFile zip2 = ZipFile.Read(freeSOInstall))
-                    {
-                        foreach (ZipEntry ex in zip2)
-                        {
-                            ex.Extract(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
-                        }
-                    }
-                }
-            }
+            BlueRose.wildZip();
 
             btnUpdate.Text = "Update";
             btnUpdate.Enabled = true;
             devBtn.Enabled = true;
             playBtn.Enabled = true;
-            dwnPrgBar.Value = 0;
 
             // ---------------------------------------------------
 
@@ -144,6 +119,12 @@ namespace BlueRoseWinForms
         private void dwnPrgBar_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void btnAbout_Click(object sender, EventArgs e)
+        {
+            AboutBox1 aboutBox = new AboutBox1();
+            aboutBox.Show();
         }
     }
 }

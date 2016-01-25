@@ -36,16 +36,6 @@ namespace BlueRoseWinForms
         {
             BlueRose.StartFSO("FSO.IDE.exe");
         }
-
-        private void brNewsBtn_Click(object sender, EventArgs e)
-        {
-            fsoWeb.Url = BlueRose.webPage("http://forum.freeso.org/threads/blue-rose-launcher.966/");
-        }
-
-        private void freeSONewsBtn_Click(object sender, EventArgs e)
-        {
-            fsoWeb.Url = BlueRose.webPage(freeSONews);
-        }
         
         private void Form1_Load(object sender, EventArgs e)
         {

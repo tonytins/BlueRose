@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Text.RegularExpressions;
 using Ionic.Zip;
+using System.Net;
 
 namespace BlueRoseWinForms
 {
@@ -111,6 +112,27 @@ namespace BlueRoseWinForms
         }
 
         /// <summary>
+        /// Return the latest dist number as a string
+        /// Thanks to LRB. http://forum.freeso.org/threads/974/
+        /// </summary>
+        /// <returns>sLine</returns>
+        public static string distNum()
+        {
+            string url = "http://servo.freeso.org/externalStatus.html?js=1";
+            WebRequest wrGETURL;
+            wrGETURL = WebRequest.Create(url);
+            SysIO.Stream objStream;
+            objStream = wrGETURL.GetResponse().GetResponseStream();
+            SysIO.StreamReader objReader = new SysIO.StreamReader(objStream);
+            string sLine = "";
+            string fll;
+            fll = objReader.ReadLine();
+            sLine = fll.Remove(0, 855);
+            sLine = sLine.Remove(sLine.IndexOf("</a>"));
+            return "Get dist #" + sLine;
+        }
+
+        /// <summary>
         /// Returns downloadArtifacts.html and then the zip file
         /// </summary>
         /// <returns>file</returns>
@@ -132,10 +154,14 @@ namespace BlueRoseWinForms
         public static void GC()
         {
             string htmlOutput = "downloadArtifacts.html";
-            string brInstaller = "BlueRoseInstaller.exe";
+            string brStableInstaller = "BlueRoseStable.exe";
+            string brBetaInstaller = "BlueRoseBeta.exe";
 
-            if (SysIO.File.Exists(brInstaller))
-                SysIO.File.Delete(brInstaller);
+            if (SysIO.File.Exists(brStableInstaller))
+                SysIO.File.Delete(brStableInstaller);
+
+            if (SysIO.File.Exists(brBetaInstaller))
+                SysIO.File.Delete(brBetaInstaller);
 
             if (SysIO.File.Exists(htmlOutput))
                 SysIO.File.Delete(htmlOutput);

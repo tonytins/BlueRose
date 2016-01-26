@@ -32,16 +32,16 @@
             this.playBtn = new System.Windows.Forms.Button();
             this.devBtn = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
-            this.btnAbout = new System.Windows.Forms.Button();
             this.fsoLogo = new System.Windows.Forms.PictureBox();
+            this.btnUpdateLauncher = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.fsoLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // playBtn
             // 
-            this.playBtn.Location = new System.Drawing.Point(137, 3);
+            this.playBtn.Location = new System.Drawing.Point(110, 6);
             this.playBtn.Name = "playBtn";
-            this.playBtn.Size = new System.Drawing.Size(75, 23);
+            this.playBtn.Size = new System.Drawing.Size(43, 23);
             this.playBtn.TabIndex = 0;
             this.playBtn.Text = "Play";
             this.playBtn.UseVisualStyleBackColor = true;
@@ -49,9 +49,9 @@
             // 
             // devBtn
             // 
-            this.devBtn.Location = new System.Drawing.Point(137, 32);
+            this.devBtn.Location = new System.Drawing.Point(159, 6);
             this.devBtn.Name = "devBtn";
-            this.devBtn.Size = new System.Drawing.Size(75, 23);
+            this.devBtn.Size = new System.Drawing.Size(58, 23);
             this.devBtn.TabIndex = 1;
             this.devBtn.Text = "Develop";
             this.devBtn.UseVisualStyleBackColor = true;
@@ -59,33 +59,34 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(136, 79);
+            this.btnUpdate.Location = new System.Drawing.Point(110, 35);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdate.Size = new System.Drawing.Size(107, 23);
             this.btnUpdate.TabIndex = 5;
-            this.btnUpdate.Text = "Update";
+            this.btnUpdate.Text = "Get build #";
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
-            // btnAbout
-            // 
-            this.btnAbout.Location = new System.Drawing.Point(136, 108);
-            this.btnAbout.Name = "btnAbout";
-            this.btnAbout.Size = new System.Drawing.Size(75, 23);
-            this.btnAbout.TabIndex = 8;
-            this.btnAbout.Text = "About";
-            this.btnAbout.UseVisualStyleBackColor = true;
-            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
-            // 
             // fsoLogo
             // 
+            this.fsoLogo.BackColor = System.Drawing.Color.Transparent;
             this.fsoLogo.Image = ((System.Drawing.Image)(resources.GetObject("fsoLogo.Image")));
-            this.fsoLogo.Location = new System.Drawing.Point(11, 4);
+            this.fsoLogo.Location = new System.Drawing.Point(12, 6);
             this.fsoLogo.Name = "fsoLogo";
-            this.fsoLogo.Size = new System.Drawing.Size(120, 127);
+            this.fsoLogo.Size = new System.Drawing.Size(92, 81);
             this.fsoLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.fsoLogo.TabIndex = 9;
             this.fsoLogo.TabStop = false;
+            // 
+            // btnUpdateLauncher
+            // 
+            this.btnUpdateLauncher.Location = new System.Drawing.Point(110, 64);
+            this.btnUpdateLauncher.Name = "btnUpdateLauncher";
+            this.btnUpdateLauncher.Size = new System.Drawing.Size(107, 23);
+            this.btnUpdateLauncher.TabIndex = 10;
+            this.btnUpdateLauncher.Text = "Update Launcher";
+            this.btnUpdateLauncher.UseVisualStyleBackColor = true;
+            this.btnUpdateLauncher.Click += new System.EventHandler(this.btnUpdateLauncher_Click);
             // 
             // Form1
             // 
@@ -93,9 +94,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(223, 138);
+            this.ClientSize = new System.Drawing.Size(225, 97);
+            this.Controls.Add(this.btnUpdateLauncher);
             this.Controls.Add(this.fsoLogo);
-            this.Controls.Add(this.btnAbout);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.devBtn);
             this.Controls.Add(this.playBtn);
@@ -117,8 +118,8 @@
         private System.Windows.Forms.Button playBtn;
         private System.Windows.Forms.Button devBtn;
         private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button btnAbout;
         private System.Windows.Forms.PictureBox fsoLogo;
+        private System.Windows.Forms.Button btnUpdateLauncher;
     }
 }
 

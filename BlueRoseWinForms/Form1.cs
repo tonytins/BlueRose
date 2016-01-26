@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Net;
 using System.Windows.Forms;
 using Ionic.Zip;
+using System.Diagnostics;
 
 namespace BlueRoseWinForms
 {
@@ -13,6 +14,7 @@ namespace BlueRoseWinForms
         private string errorBtn = "ERROR";
         WebClient client = new WebClient();
         Uri dlAddress = new Uri(@"http://servo.freeso.org/guestAuth/downloadArtifacts.html?buildTypeId=ProjectDollhouse_TsoClient&buildId=lastSuccessful");
+        string blueRoseFile = "bluerose.zip";
 
         public Form1()
         {
@@ -40,6 +42,7 @@ namespace BlueRoseWinForms
         private void Form1_Load(object sender, EventArgs e)
         {
             BlueRose.GC();
+            btnUpdate.Text = BlueRose.distNum();
         }
 
         /// <summary>
@@ -49,6 +52,7 @@ namespace BlueRoseWinForms
         /// <param name="e"></param>
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+
             try
             {
                 BlueRose.GC();
@@ -97,7 +101,7 @@ namespace BlueRoseWinForms
 
             BlueRose.wildZip();
 
-            btnUpdate.Text = "Update";
+            btnUpdate.Text = BlueRose.distNum();
             btnUpdate.Enabled = true;
             devBtn.Enabled = true;
             playBtn.Enabled = true;
@@ -111,10 +115,51 @@ namespace BlueRoseWinForms
             
         }
 
-        private void btnAbout_Click(object sender, EventArgs e)
+        private void btnUpdateLauncher_Click(object sender, EventArgs e)
         {
-            AboutBox1 aboutBox = new AboutBox1();
-            aboutBox.Show();
+            btnUpdateLauncher.Enabled = false;
+
+            WebClient client = new WebClient();
+
+            client.DownloadFileCompleted += new AsyncCompletedEventHandler(brDownloadCompleted);
+#if !(DEBUG)
+            client.DownloadFileAsync(BlueRose.webURL(@"https://dl.dropboxusercontent.com/u/42345729/BlueRoseStable.zip"),
+                blueRoseFile);
+#elif DEBUG
+            client.DownloadFileAsync(BlueRose.webURL(@"https://dl.dropboxusercontent.com/u/42345729/BlueRoseBeta.zip"),
+                blueRoseFile);
+#endif
+        }
+
+        void brDownloadCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            btnUpdateLauncher.Text = "Unpacking";
+
+            string firstUnpack = blueRoseFile;
+            string secondUnpack = "BlueRoseLauncher.zip";
+
+            using (ZipFile buildUnpack = ZipFile.Read(firstUnpack))
+            {
+                foreach (ZipEntry ex in buildUnpack)
+                {
+                    ex.Extract(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
+                }
+            }
+
+            using (ZipFile instUnpack = new ZipFile(secondUnpack))
+            {
+                foreach (ZipEntry ex in instUnpack)
+                {
+                    ex.Extract(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
+                }
+            }
+
+#if !(DEBUG)
+            Process.Start("BlueRoseStable.exe");
+#elif DEBUG
+            Process.Start("BlueRoseBeta.exe");
+#endif
+            Environment.Exit(0);
         }
     }
 }

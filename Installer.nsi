@@ -1,4 +1,4 @@
-Name "BlueRoseLauncher"
+Name "Blue Rose 2.0 Stable"
 
 Outfile "BlueRoseStable.exe"
 
@@ -13,11 +13,11 @@ Section "Main"
 
 	SetOutPath '$INSTDIR'
 
-	File "BlueRoseWinForms\bin\Release\BlueRoseLauncher.exe"
-	File "BlueRoseWinForms\bin\Release\BlueRoseLauncher.exe.config"
-	File "BlueRoseWinForms\bin\Release\BlueRoseLauncher.pdb"
-	File "BlueRoseWinForms\bin\Release\Ionic.Zip.dll"
-	File "BlueRoseWinForms\bin\Release\Ionic.Zip.xml"
+	File "BlueRose\bin\Release\BlueRoseLauncher.exe"
+	File "BlueRose\bin\Release\BlueRoseLauncher.exe.config"
+	File "BlueRose\bin\Release\BlueRoseLauncher.pdb"
+	File "BlueRose\bin\Release\Ionic.Zip.dll"
+	File "BlueRose\bin\Release\Ionic.Zip.xml"
 	
 	 # create the uninstaller
     WriteUninstaller "$INSTDIR\Uninstall BlueRoseLauncher.exe"

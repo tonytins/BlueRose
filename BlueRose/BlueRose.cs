@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 using Ionic.Zip;
 using System.Net;
 
-namespace BlueRoseWinForms
+namespace BlueRoseApp
 {
     public class BlueRose
     {
@@ -101,6 +101,25 @@ namespace BlueRoseWinForms
                 {
                     Process fsoProcess = new Process();
                     fsoProcess.StartInfo.FileName = fso;
+
+                    if (fsoParmas.Length > 0)
+                    {
+                        int ScreenWidth = int.Parse(fsoParmas[0].Split("x".ToCharArray())[0]);
+                        int ScreenHeight = int.Parse(fsoParmas[0].Split("x".ToCharArray())[1]);
+
+                        string screenRes = ScreenHeight.ToString() + ScreenWidth.ToString();
+
+                        fsoProcess.StartInfo.Arguments = screenRes;
+
+                        if (fsoParmas.Length > 1)
+                        {
+                            if (fsoParmas[1].Equals("w", StringComparison.InvariantCultureIgnoreCase))
+                                fsoProcess.StartInfo.Arguments = "w";
+                            else if (fsoParmas[1].Equals("f", StringComparison.InvariantCultureIgnoreCase))
+                                fsoProcess.StartInfo.Arguments = "f";
+                        }
+                    }
+
                     fsoProcess.Start();
                 }
 

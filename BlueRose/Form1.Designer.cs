@@ -1,4 +1,4 @@
-﻿namespace BlueRoseWinForms
+﻿namespace BlueRoseApp
 {
     partial class Form1
     {

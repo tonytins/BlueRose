@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using Ionic.Zip;
 using System.Diagnostics;
 
-namespace BlueRoseWinForms
+namespace BlueRoseApp
 {
     public partial class Form1 : Form
     {

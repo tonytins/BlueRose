@@ -1,7 +1,7 @@
 ﻿// http://www.codeproject.com/Articles/11556/Converting-Wildcards-to-Regexes
 using System.Text.RegularExpressions;
 
-namespace BlueRoseWinForms
+namespace BlueRoseApp
 {
     /// <summary>
     /// Represents a wildcard running on the

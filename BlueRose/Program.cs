@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BlueRoseWinForms
+namespace BlueRoseApp
 {
     static class Program
     {
@@ -15,9 +15,11 @@ namespace BlueRoseWinForms
         static void Main(string[] args)
         {
             BlueRose.fsoParmas = args;
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+
         }
     }
 }

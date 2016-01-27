@@ -122,13 +122,9 @@ namespace BlueRoseApp
             WebClient client = new WebClient();
 
             client.DownloadFileCompleted += new AsyncCompletedEventHandler(brDownloadCompleted);
-#if !(DEBUG)
+
             client.DownloadFileAsync(BlueRose.webURL(@"https://dl.dropboxusercontent.com/u/42345729/BlueRoseStable.zip"),
                 blueRoseFile);
-#elif DEBUG
-            client.DownloadFileAsync(BlueRose.webURL(@"https://dl.dropboxusercontent.com/u/42345729/BlueRoseBeta.zip"),
-                blueRoseFile);
-#endif
         }
 
         void brDownloadCompleted(object sender, AsyncCompletedEventArgs e)
@@ -154,11 +150,7 @@ namespace BlueRoseApp
                 }
             }
 
-#if !(DEBUG)
             Process.Start("BlueRoseStable.exe");
-#elif DEBUG
-            Process.Start("BlueRoseBeta.exe");
-#endif
             Environment.Exit(0);
         }
     }

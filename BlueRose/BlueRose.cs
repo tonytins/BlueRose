@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 using Ionic.Zip;
 using System.Net;
 
-namespace BlueRoseApp
+namespace BlueRose
 {
     public class BlueRose
     {
@@ -152,22 +152,6 @@ namespace BlueRoseApp
         }
 
         /// <summary>
-        /// Returns downloadArtifacts.html and then the zip file
-        /// </summary>
-        /// <returns>file</returns>
-        public static string dlFile(string address, string buildType)
-        {
-            Uri uri = new Uri(@"http://" + address + "/guestAuth/downloadArtifacts.html?buildTypeId=" + buildType +"&buildId=lastSuccessful");
-            string file = SysIO.Path.GetFileName(uri.LocalPath);
-            return file;
-        }
-
-        public static Uri dlAddress(string address, string buildType)
-        {
-            return new Uri(@"http://" + address + "/guestAuth/downloadArtifacts.html?buildTypeId=" + buildType + "&buildId=lastSuccessful");
-        }
-
-        /// <summary>
         /// Deletes downloadArtifacts.html
         /// </summary>
         public static void GC()
@@ -200,7 +184,7 @@ namespace BlueRoseApp
         /// <summary>
         /// Detects for any present zips and unpacks them.
         /// </summary>
-        public static void wildZip()
+        public static void wildUnZip()
         {
             Wildcard secondUnpack = new Wildcard("*.zip", RegexOptions.IgnoreCase);
 

@@ -4,8 +4,9 @@ using System.Net;
 using System.Windows.Forms;
 using Ionic.Zip;
 using System.Diagnostics;
+using BlueRose.TeamCity;
 
-namespace BlueRoseApp
+namespace BlueRose
 {
     public partial class Form1 : Form
     {
@@ -59,8 +60,7 @@ namespace BlueRoseApp
                 
                 client.DownloadFileCompleted += new AsyncCompletedEventHandler(freeSODownloadCompleted);
 
-                client.DownloadFileAsync(BlueRose.dlAddress("servo.freeso.org", "ProjectDollhouse_TsoClient"),
-                    "freeso.zip");
+                client.DownloadFileAsync(Distro.tcAddress("servo.freeso.org", "ProjectDollhouse_TsoClient"), "teamcity.zip");
 
                 btnUpdate.Text = "Downloading";
                 btnUpdate.Enabled = false;
@@ -84,29 +84,14 @@ namespace BlueRoseApp
         {
             btnUpdate.Text = "Unpacking";
 
-            string firstUnpack = "freeso.zip";
+            Distro.tcUnpack();
 
-            using (ZipFile buildUnpack = ZipFile.Read(firstUnpack))
-            {
-                foreach (ZipEntry ex in buildUnpack)
-                {
-
-                    ex.Extract(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
-                }
-            }
-
-
-            // http://www.codeproject.com/Articles/11556/Converting-Wildcards-to-Regexes
-            // ---------------------------------------------------
-
-            BlueRose.wildZip();
+            BlueRose.wildUnZip();
 
             btnUpdate.Text = BlueRose.distNum();
             btnUpdate.Enabled = true;
             devBtn.Enabled = true;
             playBtn.Enabled = true;
-
-            // ---------------------------------------------------
 
         }
 

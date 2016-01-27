@@ -1,4 +1,4 @@
-﻿namespace BlueRoseApp
+﻿namespace BlueRose
 {
     partial class Form1
     {

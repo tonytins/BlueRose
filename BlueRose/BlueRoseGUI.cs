@@ -1,23 +1,36 @@
-﻿using System;
+﻿// Copyright(C) 2016  Blue Rose Project
+
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License along
+// with this program; if not, write to the Free Software Foundation, Inc.,
+// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+using System;
 using System.ComponentModel;
 using System.Net;
 using System.Windows.Forms;
 using Ionic.Zip;
 using System.Diagnostics;
-using BlueRose.TeamCity;
+using BlueRose.Distro;
 
 namespace BlueRose
 {
-    public partial class Form1 : Form
+    public partial class BlueRoseGUI : Form
     {
-
-        public string freeSONews = "http://forum.freeso.org/threads/road-to-live-release.801/";
         private string errorBtn = "ERROR";
         WebClient client = new WebClient();
-        Uri dlAddress = new Uri(@"http://servo.freeso.org/guestAuth/downloadArtifacts.html?buildTypeId=ProjectDollhouse_TsoClient&buildId=lastSuccessful");
         string blueRoseFile = "bluerose.zip";
 
-        public Form1()
+        public BlueRoseGUI()
         {
             try
             {
@@ -60,7 +73,7 @@ namespace BlueRose
                 
                 client.DownloadFileCompleted += new AsyncCompletedEventHandler(freeSODownloadCompleted);
 
-                client.DownloadFileAsync(Distro.tcAddress("servo.freeso.org", "ProjectDollhouse_TsoClient"), "teamcity.zip");
+                client.DownloadFileAsync(TeamCity.tcAddress("servo.freeso.org", "ProjectDollhouse_TsoClient"), "teamcity.zip");
 
                 btnUpdate.Text = "Downloading";
                 btnUpdate.Enabled = false;
@@ -82,9 +95,9 @@ namespace BlueRose
 
         void freeSODownloadCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            btnUpdate.Text = "Unpacking";
+            btnUpdate.Text = "Installing";
 
-            Distro.tcUnpack();
+            TeamCity.tcUnpack();
 
             BlueRose.wildUnZip();
 
@@ -126,6 +139,8 @@ namespace BlueRose
                     ex.Extract(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
                 }
             }
+
+            btnUpdateLauncher.Text = "Installing";
 
             using (ZipFile instUnpack = new ZipFile(secondUnpack))
             {

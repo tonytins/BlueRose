@@ -7,8 +7,8 @@
     <ProjectGuid>{5C2BA9FE-C9FD-4243-B906-8E08F8D8AAE5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BlueRose.TeamCity</RootNamespace>
-    <AssemblyName>BlueRose.TeamCity</AssemblyName>
+    <RootNamespace>BlueRose.Distro</RootNamespace>
+    <AssemblyName>BlueRose.Distro</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

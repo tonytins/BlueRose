@@ -1,6 +1,6 @@
 ﻿namespace BlueRose
 {
-    partial class Form1
+    partial class BlueRoseGUI
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BlueRoseGUI));
             this.playBtn = new System.Windows.Forms.Button();
             this.devBtn = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();

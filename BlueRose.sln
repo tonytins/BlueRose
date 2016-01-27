@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueRose", "BlueRose\BlueRose.csproj", "{DC049B5A-733A-4137-AE58-2495517ECA2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueRose.TeamCity", "BlueRose.TeamCity\BlueRose.TeamCity.csproj", "{5C2BA9FE-C9FD-4243-B906-8E08F8D8AAE5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueRose.Distro", "BlueRose.Distro\BlueRose.Distro.csproj", "{5C2BA9FE-C9FD-4243-B906-8E08F8D8AAE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,20 @@
-﻿using System;
+﻿// Copyright(C) 2016  Blue Rose Project
+
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License along
+// with this program; if not, write to the Free Software Foundation, Inc.,
+// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+using System;
 using System.Diagnostics;
 using SysIO = System.IO;
 using System.Text;
@@ -47,34 +63,6 @@ namespace BlueRose
             catch
             {
                 return new Uri(null);
-            }
-        }
-
-        /// <summary>
-        /// Fetches RSS feed
-        /// </summary>
-        /// <param name="feedurl"></param>
-        /// <returns></returns>
-        public static string ParseRSSFeed(string feedurl)
-        {
-            try
-            {
-                XmlDocument rssXmlDoc = new XmlDocument();
-                rssXmlDoc.Load(feedurl);
-                XmlNodeList rssNodes = rssXmlDoc.SelectNodes("rss/channel/item");
-                StringBuilder rssContent = new StringBuilder();
-                foreach (XmlNode rssNode in rssNodes)
-                {
-                    XmlNode rssSubNode = rssNode.SelectSingleNode("title");
-                    string title = rssSubNode != null ? rssSubNode.InnerText : "";
-                    rssContent.AppendFormat(title + Environment.NewLine);
-
-                }
-                return rssContent.ToString();
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
             }
         }
 
@@ -152,7 +140,7 @@ namespace BlueRose
         }
 
         /// <summary>
-        /// Deletes downloadArtifacts.html
+        /// Cleans up downloaded files.
         /// </summary>
         public static void GC()
         {
@@ -186,14 +174,14 @@ namespace BlueRose
         /// </summary>
         public static void wildUnZip()
         {
-            Wildcard secondUnpack = new Wildcard("*.zip", RegexOptions.IgnoreCase);
+            Wildcard unpacker = new Wildcard("*.zip", RegexOptions.IgnoreCase);
 
             // Get a list of files in the My Documents folder
             string[] files = SysIO.Directory.GetFiles(Environment.CurrentDirectory);
 
             foreach (string file in files)
             {
-                if (secondUnpack.IsMatch(file))
+                if (unpacker.IsMatch(file))
                 {
                     using (ZipFile zip2 = ZipFile.Read(file))
                     {

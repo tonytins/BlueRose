@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlueRose.Properties {
+namespace BlueRoseApp.Properties {
     using System;
     
     

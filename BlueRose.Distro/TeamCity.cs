@@ -19,6 +19,7 @@ using Ionic.Zip;
 using System;
 using System.IO;
 using System.Net;
+using System.Windows.Forms;
 
 namespace BlueRose.Distro
 {
@@ -32,19 +33,26 @@ namespace BlueRose.Distro
         /// <param name="distFile"></param>
         public static void tcManaged(string address, string buildType, string distFile = "teamcity.zip")
         {
-            WebClient client = new WebClient();
-
-            Uri uri = new Uri(@"http://" + address + "/guestAuth/downloadArtifacts.html?buildTypeId=" + buildType + "&buildId=lastSuccessful");
-            distFile = Path.GetFileName(uri.LocalPath);
-
-            client.DownloadFileAsync(tcAddress(address, buildType), distFile);
-
-            using (ZipFile buildUnpack = ZipFile.Read(distFile))
+            try
             {
-                foreach (ZipEntry ex in buildUnpack)
+                WebClient client = new WebClient();
+
+                Uri uri = new Uri(@"http://" + address + "/guestAuth/downloadArtifacts.html?buildTypeId=" + buildType + "&buildId=lastSuccessful");
+                distFile = Path.GetFileName(uri.LocalPath);
+
+                client.DownloadFileAsync(tcAddress(address, buildType), distFile);
+
+                using (ZipFile buildUnpack = ZipFile.Read(distFile))
                 {
-                    ex.Extract(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
+                    foreach (ZipEntry ex in buildUnpack)
+                    {
+                        ex.Extract(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -71,9 +79,17 @@ namespace BlueRose.Distro
         /// <param name="distFile"></param>
         public static string tcDistFile(string address, string buildType, string distFile = "teamcity.zip")
         {
-            Uri uri = new Uri(@"http://" + address + "/guestAuth/downloadArtifacts.html?buildTypeId=" + buildType + "&buildId=lastSuccessful");
-            distFile = Path.GetFileName(uri.LocalPath);
-            return distFile;
+            try
+            {
+                Uri uri = new Uri(@"http://" + address + "/guestAuth/downloadArtifacts.html?buildTypeId=" + buildType + "&buildId=lastSuccessful");
+                distFile = Path.GetFileName(uri.LocalPath);
+                return distFile;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
         }
 
         /// <summary>
@@ -84,7 +100,15 @@ namespace BlueRose.Distro
         /// <returns></returns>
         public static Uri tcAddress(string address, string buildType)
         {
-            return new Uri(@"http://" + address + "/guestAuth/downloadArtifacts.html?buildTypeId=" + buildType + "&buildId=lastSuccessful");
+            try
+            {
+                return new Uri(@"http://" + address + "/guestAuth/downloadArtifacts.html?buildTypeId=" + buildType + "&buildId=lastSuccessful");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
         }
     }
 }

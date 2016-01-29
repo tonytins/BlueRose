@@ -88,22 +88,10 @@ namespace BlueRose
                     Process fsoProcess = new Process();
                     fsoProcess.StartInfo.FileName = fso;
 
-                    /* if (fsoParmas.Length > 0)
+                    for (var i = 0; i < fsoParmas.Length; i++)
                     {
-                        int ScreenWidth = int.Parse(fsoParmas[0].Split("x".ToCharArray())[0]);
-                        int ScreenHeight = int.Parse(fsoParmas[0].Split("x".ToCharArray())[1]);
-
-                        fsoProcess.StartInfo.Arguments = ScreenWidth.ToString();
-                        fsoProcess.StartInfo.Arguments = ScreenHeight.ToString();
-
-                        if (fsoParmas.Length > 1)
-                        {
-                            if (fsoParmas[1].Equals("w", StringComparison.InvariantCultureIgnoreCase))
-                                fsoProcess.StartInfo.Arguments = "w";
-                            else if (fsoParmas[1].Equals("f", StringComparison.InvariantCultureIgnoreCase))
-                                fsoProcess.StartInfo.Arguments = "f";
-                        }
-                    } */
+                        fsoProcess.StartInfo.Arguments = fsoParmas[i];
+                    }
 
                     fsoProcess.StartInfo.UseShellExecute = true;
                     fsoProcess.Start();
@@ -134,7 +122,45 @@ namespace BlueRose
             fll = objReader.ReadLine();
             sLine = fll.Remove(0, 855);
             sLine = sLine.Remove(sLine.IndexOf("</a>"));
-            return "Get dist #" + sLine;
+            return sLine;
+        }
+
+        public static string readBuild(string file)
+        {
+            string line;
+
+            try
+            {
+                string buildFile = Environment.CurrentDirectory + file;
+                SysIO.StreamReader fileRead = new SysIO.StreamReader(buildFile);
+                while ((line = fileRead.ReadLine()) != null)
+                {
+                    return "#" + line;
+                }
+
+                fileRead.Close();
+            }
+            catch
+            {
+                return "NONE";
+            }
+
+            return "";
+        }
+
+        public static void writeBuild(string file)
+        {
+            string buildFile = Environment.CurrentDirectory + file;
+            string localDist = distNum();
+
+            try
+            {
+                SysIO.File.WriteAllText(buildFile, localDist);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>
@@ -143,14 +169,14 @@ namespace BlueRose
         public static void GC()
         {
             string htmlOutput = "downloadArtifacts.html";
-            string brStableInstaller = "BlueRoseStable.exe";
-            string brBetaInstaller = "BlueRoseBeta.exe";
+            string brLegacyInstaller = "BlueRoseStable.exe";
+            string brUpdateInstaller = "BlueRoseUpdate.exe";
 
-            if (SysIO.File.Exists(brStableInstaller))
-                SysIO.File.Delete(brStableInstaller);
+            if (SysIO.File.Exists(brLegacyInstaller))
+                SysIO.File.Delete(brLegacyInstaller);
 
-            if (SysIO.File.Exists(brBetaInstaller))
-                SysIO.File.Delete(brBetaInstaller);
+            if (SysIO.File.Exists(brUpdateInstaller))
+                SysIO.File.Delete(brUpdateInstaller);
 
             if (SysIO.File.Exists(htmlOutput))
                 SysIO.File.Delete(htmlOutput);

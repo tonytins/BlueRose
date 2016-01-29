@@ -29,12 +29,16 @@ namespace BlueRose
         private string errorBtn = "ERROR";
         WebClient client = new WebClient();
         string blueRoseFile = "bluerose.zip";
+        string updateBuild = "Update to #" + BlueRose.distNum();
 
         public BlueRoseGUI()
         {
             try
             {
                 InitializeComponent();
+                this.MaximizeBox = false;
+                this.MinimizeBox = false;
+                localBuild.Text = BlueRose.readBuild("fsobuild");
 
             } catch (Exception ex)
             {
@@ -57,7 +61,7 @@ namespace BlueRose
         private void Form1_Load(object sender, EventArgs e)
         {
             BlueRose.GC();
-            btnUpdate.Text = BlueRose.distNum();
+            btnUpdate.Text = updateBuild;
         }
 
         /// <summary>
@@ -102,7 +106,9 @@ namespace BlueRose
 
             BlueRose.wildUnZip();
 
-            btnUpdate.Text = BlueRose.distNum();
+            BlueRose.writeBuild("fsobuild");
+
+            btnUpdate.Text = updateBuild;
             btnUpdate.Enabled = true;
             devBtn.Enabled = true;
             playBtn.Enabled = true;
@@ -122,7 +128,7 @@ namespace BlueRose
 
             client.DownloadFileCompleted += new AsyncCompletedEventHandler(brDownloadCompleted);
 
-            client.DownloadFileAsync(BlueRose.webURL(@"https://dl.dropboxusercontent.com/u/42345729/BlueRoseStable.zip"),
+            client.DownloadFileAsync(BlueRose.webURL(@"https://dl.dropboxusercontent.com/u/42345729/BlueRoseUpdate.zip"),
                 blueRoseFile);
         }
 
@@ -131,7 +137,7 @@ namespace BlueRose
             btnUpdateLauncher.Text = "Unpacking";
 
             string firstUnpack = blueRoseFile;
-            string secondUnpack = "BlueRoseLauncher.zip";
+            string secondUnpack = "BlueRoseUpdate.zip";
 
             using (ZipFile buildUnpack = ZipFile.Read(firstUnpack))
             {
@@ -151,8 +157,18 @@ namespace BlueRose
                 }
             }
 
-            Process.Start("BlueRoseStable.exe");
+            Process.Start("BlueRoseUpdate.exe");
             Environment.Exit(0);
+        }
+
+        private void versionIS_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void localBuild_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -29,7 +29,7 @@ namespace BlueRose
         private string errorBtn = "ERROR";
         WebClient client = new WebClient();
         string blueRoseFile = "bluerose.zip";
-        string updateBuild = "Update to #" + BlueRose.distNum();
+        string updateBuild = "Latest build #" + BlueRose.distNum();
 
         public BlueRoseGUI()
         {

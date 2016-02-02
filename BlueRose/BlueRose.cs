@@ -125,13 +125,18 @@ namespace BlueRose
             return sLine;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         public static string readBuild(string file)
         {
             string line;
 
             try
             {
-                string buildFile = Environment.CurrentDirectory + file;
+                string buildFile = Environment.CurrentDirectory + @"/" + file;
                 SysIO.StreamReader fileRead = new SysIO.StreamReader(buildFile);
                 while ((line = fileRead.ReadLine()) != null)
                 {
@@ -148,9 +153,13 @@ namespace BlueRose
             return "";
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="file"></param>
         public static void writeBuild(string file)
         {
-            string buildFile = Environment.CurrentDirectory + file;
+            string buildFile = Environment.CurrentDirectory + @"/" + file;
             string localDist = distNum();
 
             try

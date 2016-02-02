@@ -29,7 +29,8 @@ namespace BlueRose
         private string errorBtn = "ERROR";
         WebClient client = new WebClient();
         string blueRoseFile = "bluerose.zip";
-        string updateBuild = "Latest build #" + BlueRose.distNum();
+        string updateBuild = "Download build #" + BlueRose.distNum();
+        string build = "fsobuild";
 
         public BlueRoseGUI()
         {
@@ -38,7 +39,7 @@ namespace BlueRose
                 InitializeComponent();
                 this.MaximizeBox = false;
                 this.MinimizeBox = false;
-                localBuild.Text = BlueRose.readBuild("fsobuild");
+                localBuild.Text = BlueRose.readBuild(build);
 
             } catch (Exception ex)
             {
@@ -80,6 +81,8 @@ namespace BlueRose
 
                 client.DownloadFileAsync(TeamCity.tcAddress("servo.freeso.org", "ProjectDollhouse_TsoClient"), "teamcity.zip");
 
+                localBuild.Text = "...";
+
                 btnUpdate.Text = "Downloading";
                 btnUpdate.Enabled = false;
                 devBtn.Enabled = false;
@@ -106,12 +109,15 @@ namespace BlueRose
 
             BlueRose.wildUnZip();
 
-            BlueRose.writeBuild("fsobuild");
+            BlueRose.writeBuild(build);
+            
 
             btnUpdate.Text = updateBuild;
             btnUpdate.Enabled = true;
             devBtn.Enabled = true;
             playBtn.Enabled = true;
+
+            localBuild.Text = BlueRose.readBuild(build);
 
         }
 

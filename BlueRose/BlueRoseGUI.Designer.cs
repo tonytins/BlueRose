@@ -41,7 +41,7 @@
             // 
             // playBtn
             // 
-            this.playBtn.Location = new System.Drawing.Point(12, 92);
+            this.playBtn.Location = new System.Drawing.Point(8, 89);
             this.playBtn.Name = "playBtn";
             this.playBtn.Size = new System.Drawing.Size(50, 23);
             this.playBtn.TabIndex = 0;
@@ -51,7 +51,7 @@
             // 
             // devBtn
             // 
-            this.devBtn.Location = new System.Drawing.Point(68, 92);
+            this.devBtn.Location = new System.Drawing.Point(64, 89);
             this.devBtn.Name = "devBtn";
             this.devBtn.Size = new System.Drawing.Size(60, 23);
             this.devBtn.TabIndex = 1;
@@ -61,7 +61,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(12, 121);
+            this.btnUpdate.Location = new System.Drawing.Point(8, 118);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(116, 23);
             this.btnUpdate.TabIndex = 5;
@@ -73,7 +73,7 @@
             // 
             this.fsoLogo.BackColor = System.Drawing.Color.Transparent;
             this.fsoLogo.Image = ((System.Drawing.Image)(resources.GetObject("fsoLogo.Image")));
-            this.fsoLogo.Location = new System.Drawing.Point(12, 12);
+            this.fsoLogo.Location = new System.Drawing.Point(8, 9);
             this.fsoLogo.Name = "fsoLogo";
             this.fsoLogo.Size = new System.Drawing.Size(116, 57);
             this.fsoLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -82,7 +82,7 @@
             // 
             // btnUpdateLauncher
             // 
-            this.btnUpdateLauncher.Location = new System.Drawing.Point(12, 150);
+            this.btnUpdateLauncher.Location = new System.Drawing.Point(8, 147);
             this.btnUpdateLauncher.Name = "btnUpdateLauncher";
             this.btnUpdateLauncher.Size = new System.Drawing.Size(116, 23);
             this.btnUpdateLauncher.TabIndex = 10;
@@ -93,7 +93,7 @@
             // localBuild
             // 
             this.localBuild.AutoSize = true;
-            this.localBuild.Location = new System.Drawing.Point(89, 76);
+            this.localBuild.Location = new System.Drawing.Point(85, 73);
             this.localBuild.Name = "localBuild";
             this.localBuild.Size = new System.Drawing.Size(35, 13);
             this.localBuild.TabIndex = 11;
@@ -103,7 +103,7 @@
             // versionIS
             // 
             this.versionIS.AutoSize = true;
-            this.versionIS.Location = new System.Drawing.Point(9, 76);
+            this.versionIS.Location = new System.Drawing.Point(5, 73);
             this.versionIS.Name = "versionIS";
             this.versionIS.Size = new System.Drawing.Size(74, 13);
             this.versionIS.TabIndex = 12;
@@ -116,7 +116,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(142, 182);
+            this.ClientSize = new System.Drawing.Size(132, 182);
             this.Controls.Add(this.versionIS);
             this.Controls.Add(this.localBuild);
             this.Controls.Add(this.btnUpdateLauncher);

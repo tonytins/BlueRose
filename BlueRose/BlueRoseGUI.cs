@@ -29,17 +29,22 @@ namespace BlueRose
         private string errorBtn = "ERROR";
         WebClient client = new WebClient();
         string blueRoseFile = "bluerose.zip";
-        string updateBuild = "Download build #" + BlueRose.distNum();
-        string build = "fsobuild";
+        string netBuild = "#" + BlueRose.distNum();
+        string buildFile = "fsobuild";
+
+        
 
         public BlueRoseGUI()
         {
             try
             {
                 InitializeComponent();
+
                 this.MaximizeBox = false;
                 this.MinimizeBox = false;
-                localBuild.Text = BlueRose.readBuild(build);
+
+                localBuild.Text = BlueRose.readBuild(buildFile);
+                onlineBuildLabel.Text = "#" + BlueRose.distNum();
 
             } catch (Exception ex)
             {
@@ -62,7 +67,6 @@ namespace BlueRose
         private void Form1_Load(object sender, EventArgs e)
         {
             BlueRose.GC();
-            btnUpdate.Text = updateBuild;
         }
 
         /// <summary>
@@ -109,15 +113,13 @@ namespace BlueRose
 
             BlueRose.wildUnZip();
 
-            BlueRose.writeBuild(build);
-            
+            BlueRose.writeBuild(buildFile);
 
-            btnUpdate.Text = updateBuild;
             btnUpdate.Enabled = true;
             devBtn.Enabled = true;
             playBtn.Enabled = true;
 
-            localBuild.Text = BlueRose.readBuild(build);
+            localBuild.Text = BlueRose.readBuild(buildFile);
 
         }
 
@@ -173,6 +175,10 @@ namespace BlueRose
         }
 
         private void localBuild_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }

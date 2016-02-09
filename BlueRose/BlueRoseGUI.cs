@@ -43,9 +43,6 @@ namespace BlueRose
                 this.MaximizeBox = false;
                 this.MinimizeBox = false;
 
-                localBuild.Text = BlueRose.readBuild(buildFile);
-                onlineBuildLabel.Text = "#" + BlueRose.distNum();
-
             } catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -67,6 +64,16 @@ namespace BlueRose
         private void Form1_Load(object sender, EventArgs e)
         {
             BlueRose.GC();
+
+            try
+            {
+                localBuild.Text = BlueRose.readBuild(buildFile);
+                onlineBuildLabel.Text = "#" + BlueRose.distNum();
+            }
+            catch
+            {
+                onlineBuildLabel.Text = "Offline";
+            }
         }
 
         /// <summary>
@@ -107,6 +114,7 @@ namespace BlueRose
 
         void freeSODownloadCompleted(object sender, AsyncCompletedEventArgs e)
         {
+
             btnUpdate.Text = "Installing";
 
             TeamCity.tcUnpack();
@@ -120,6 +128,8 @@ namespace BlueRose
             playBtn.Enabled = true;
 
             localBuild.Text = BlueRose.readBuild(buildFile);
+
+            btnUpdate.Text = "Update FreeSO";
 
         }
 
@@ -181,6 +191,18 @@ namespace BlueRose
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void onlineBuildLabel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                onlineBuildLabel.Text = "#" + BlueRose.distNum();
+            }
+            catch
+            {
+                onlineBuildLabel.Text = "FAILED";
+            }
         }
     }
 }

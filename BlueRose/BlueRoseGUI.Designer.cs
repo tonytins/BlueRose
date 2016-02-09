@@ -118,6 +118,7 @@
             this.onlineBuildLabel.Size = new System.Drawing.Size(35, 13);
             this.onlineBuildLabel.TabIndex = 14;
             this.onlineBuildLabel.Text = "label1";
+            this.onlineBuildLabel.Click += new System.EventHandler(this.onlineBuildLabel_Click);
             // 
             // fsoLogo
             // 

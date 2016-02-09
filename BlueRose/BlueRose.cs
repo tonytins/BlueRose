@@ -71,37 +71,21 @@ namespace BlueRose
         /// <param name="fso"></param>
         public static void StartFSO(string fso)
         {
-            string notFoundTitle = "Not found";
-            string openAL3264 = @"C:\Program Files (x86)\OpenAL";
-            string openAL = @"C:\Program Files\OpenAL";
-
-            bool openALDir = SysIO.Directory.Exists(openAL3264) || SysIO.Directory.Exists(openAL);
-
+            
             try
             {
-                if (!openALDir)
-                {
-                    MessageBox.Show("OpenAL not found!" + Environment.NewLine + "Go to openal.org/downloads and get the Windows installer...", notFoundTitle);
-                }
-                else
-                {
-                    Process fsoProcess = new Process();
-                    fsoProcess.StartInfo.FileName = fso;
+                Process fsoProcess = new Process();
 
-                    for (var i = 0; i < fsoParmas.Length; i++)
-                    {
-                        fsoProcess.StartInfo.Arguments = fsoParmas[i];
-                    }
+                fsoProcess.StartInfo.FileName = fso;
+                fsoProcess.StartInfo.UseShellExecute = true;
+                fsoProcess.Start();
 
-                    fsoProcess.StartInfo.UseShellExecute = true;
-                    fsoProcess.Start();
-                }
-
-            }
-            catch (Exception ex)
+            } catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, fso);
             }
+            
+
         }
 
         /// <summary>

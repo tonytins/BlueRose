@@ -140,14 +140,25 @@ namespace BlueRose
 
         private void btnUpdateLauncher_Click(object sender, EventArgs e)
         {
-            btnUpdateLauncher.Enabled = false;
-
-            WebClient client = new WebClient();
-
-            client.DownloadFileCompleted += new AsyncCompletedEventHandler(brDownloadCompleted);
-
-            client.DownloadFileAsync(BlueRose.webURL(@"https://dl.dropboxusercontent.com/u/42345729/BlueRoseUpdate.zip"),
-                blueRoseFile);
+            try
+            {
+                ProcessStartInfo newProccess = new ProcessStartInfo("SimplyUpdate.exe");
+                newProccess.UseShellExecute = true;
+                newProccess.Verb = "runas";
+                Process.Start(newProccess);
+                try
+                {
+                    Application.Exit();
+                }
+                catch
+                {
+                    Environment.Exit(0);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         void brDownloadCompleted(object sender, AsyncCompletedEventArgs e)

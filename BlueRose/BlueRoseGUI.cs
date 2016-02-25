@@ -28,11 +28,8 @@ namespace BlueRose
     {
         private string errorBtn = "ERROR";
         WebClient client = new WebClient();
-        string blueRoseFile = "bluerose.zip";
         string netBuild = "#" + BlueRose.distNum();
         string buildFile = "fsobuild";
-
-        
 
         public BlueRoseGUI()
         {
@@ -43,7 +40,8 @@ namespace BlueRose
                 this.MaximizeBox = false;
                 this.MinimizeBox = false;
 
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -60,7 +58,7 @@ namespace BlueRose
         {
             BlueRose.StartFSO("FSO.IDE.exe");
         }
-        
+
         private void Form1_Load(object sender, EventArgs e)
         {
             BlueRose.GC();
@@ -90,7 +88,7 @@ namespace BlueRose
                 
                 client.DownloadFileCompleted += new AsyncCompletedEventHandler(freeSODownloadCompleted);
 
-                client.DownloadFileAsync(TeamCity.tcAddress("servo.freeso.org", "ProjectDollhouse_TsoClient"), "teamcity.zip");
+                client.DownloadFileAsync(BlueRose.teamCityUri(), "teamcity.zip");
 
                 localBuild.Text = "...";
 
@@ -117,19 +115,27 @@ namespace BlueRose
 
             btnUpdate.Text = "Installing";
 
-            TeamCity.tcUnpack();
+            try
+            {
+                TeamCity.tcUnpack();
 
-            BlueRose.wildUnZip();
+                btnUpdate.Enabled = true;
+                devBtn.Enabled = true;
+                playBtn.Enabled = true;
 
-            BlueRose.writeBuild(buildFile);
+                localBuild.Text = BlueRose.readBuild(buildFile);
 
-            btnUpdate.Enabled = true;
-            devBtn.Enabled = true;
-            playBtn.Enabled = true;
-
-            localBuild.Text = BlueRose.readBuild(buildFile);
-
-            btnUpdate.Text = "Update FreeSO";
+                btnUpdate.Text = "Update FreeSO";
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                MessageBox.Show(ex.Message);
+#endif
+                btnUpdate.Text = errorBtn;
+                localBuild.Text = "?";
+                btnUpdate.Enabled = false;
+            }
 
         }
 
@@ -159,49 +165,6 @@ namespace BlueRose
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        void brDownloadCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            btnUpdateLauncher.Text = "Unpacking";
-
-            string firstUnpack = blueRoseFile;
-            string secondUnpack = "BlueRoseUpdate.zip";
-
-            using (ZipFile buildUnpack = ZipFile.Read(firstUnpack))
-            {
-                foreach (ZipEntry ex in buildUnpack)
-                {
-                    ex.Extract(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
-                }
-            }
-
-            btnUpdateLauncher.Text = "Installing";
-
-            using (ZipFile instUnpack = new ZipFile(secondUnpack))
-            {
-                foreach (ZipEntry ex in instUnpack)
-                {
-                    ex.Extract(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
-                }
-            }
-
-            Process.Start("BlueRoseUpdate.exe");
-            Environment.Exit(0);
-        }
-
-        private void versionIS_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void localBuild_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void onlineBuildLabel_Click(object sender, EventArgs e)

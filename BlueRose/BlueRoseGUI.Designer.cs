@@ -38,6 +38,7 @@
             this.latestBuild = new System.Windows.Forms.Label();
             this.onlineBuildLabel = new System.Windows.Forms.Label();
             this.fsoLogo = new System.Windows.Forms.PictureBox();
+            this.legacyLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fsoLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -89,7 +90,6 @@
             this.localBuild.Size = new System.Drawing.Size(35, 13);
             this.localBuild.TabIndex = 11;
             this.localBuild.Text = "label1";
-            this.localBuild.Click += new System.EventHandler(this.localBuild_Click);
             // 
             // versionIS
             // 
@@ -99,7 +99,6 @@
             this.versionIS.Size = new System.Drawing.Size(74, 13);
             this.versionIS.TabIndex = 12;
             this.versionIS.Text = "Installed build:";
-            this.versionIS.Click += new System.EventHandler(this.versionIS_Click);
             // 
             // latestBuild
             // 
@@ -129,7 +128,15 @@
             this.fsoLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.fsoLogo.TabIndex = 18;
             this.fsoLogo.TabStop = false;
-            this.fsoLogo.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // legacyLabel
+            // 
+            this.legacyLabel.AutoSize = true;
+            this.legacyLabel.Location = new System.Drawing.Point(41, 195);
+            this.legacyLabel.Name = "legacyLabel";
+            this.legacyLabel.Size = new System.Drawing.Size(42, 13);
+            this.legacyLabel.TabIndex = 19;
+            this.legacyLabel.Text = "Legacy";
             // 
             // BlueRoseGUI
             // 
@@ -137,7 +144,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(132, 201);
+            this.ClientSize = new System.Drawing.Size(132, 216);
+            this.Controls.Add(this.legacyLabel);
             this.Controls.Add(this.fsoLogo);
             this.Controls.Add(this.onlineBuildLabel);
             this.Controls.Add(this.latestBuild);
@@ -172,6 +180,7 @@
         private System.Windows.Forms.Label latestBuild;
         private System.Windows.Forms.Label onlineBuildLabel;
         private System.Windows.Forms.PictureBox fsoLogo;
+        private System.Windows.Forms.Label legacyLabel;
     }
 }
 

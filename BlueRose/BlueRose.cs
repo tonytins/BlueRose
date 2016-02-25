@@ -21,6 +21,7 @@ using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using Ionic.Zip;
 using System.Net;
+using BlueRose.Distro;
 
 namespace BlueRose
 {
@@ -28,6 +29,12 @@ namespace BlueRose
     {
 
         public static string[] fsoParmas { get; set; }
+
+        public static Uri teamCityUri(string address = "servo.freeso.org", string buildType = "ProjectDollhouse_TsoClient", string buildId = "316")
+        {
+            // http://servo.freeso.org/repository/download/ProjectDollhouse_TsoClient/316:id/dist-241.zip
+            return new Uri(@"http://" + address + @"/repository/download/" + buildType + @"/" + buildId + @":id/dist-" + distNum() + ".zip?guest=1");
+        }
 
         /// <summary>
         /// Returns a given URL. If it isn't there,
@@ -80,7 +87,8 @@ namespace BlueRose
                 fsoProcess.StartInfo.UseShellExecute = true;
                 fsoProcess.Start();
 
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, fso);
             }
@@ -177,7 +185,7 @@ namespace BlueRose
             Wildcard wildZip = new Wildcard("*.zip", RegexOptions.IgnoreCase);
             string[] files = SysIO.Directory.GetFiles(Environment.CurrentDirectory);
 
-            foreach(string file in files)
+            foreach (string file in files)
             {
                 if (wildZip.IsMatch(file))
                 {

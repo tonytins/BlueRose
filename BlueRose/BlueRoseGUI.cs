@@ -21,6 +21,7 @@ using System.Windows.Forms;
 using Ionic.Zip;
 using System.Diagnostics;
 using BlueRose.Distro;
+using System.Net.NetworkInformation;
 
 namespace BlueRose
 {
@@ -30,6 +31,8 @@ namespace BlueRose
         WebClient client = new WebClient();
         string netBuild = "#" + BlueRose.distNum();
         string buildFile = "fsobuild";
+        string simplyupdate = "simplyupdate.zip";
+        string blupdateraddress = "https://dl.dropboxusercontent.com/u/42345729/blupdater.zip";
 
         public BlueRoseGUI()
         {
@@ -40,23 +43,56 @@ namespace BlueRose
                 this.MaximizeBox = false;
                 this.MinimizeBox = false;
 
+                Ping pinger = new Ping();
+                bool pingable = false;
+
+                try
+                {
+                    PingReply reply = pinger.Send(blupdateraddress);
+                    if (pingable = reply.Status == IPStatus.Success)
+                    {
+                        client.DownloadFileCompleted += new AsyncCompletedEventHandler(updaterdownload);
+
+                        client.DownloadFileAsync(new Uri(blupdateraddress), simplyupdate);
+                    }
+                }
+                catch (PingException ex)
+                {
+#if DEBUG
+                    MessageBox.Show(ex.Message);
+#endif
+                }
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+ 
+        }
 
-            
+        private void updaterdownload(object sender, AsyncCompletedEventArgs e)
+        {
+            using (ZipFile zip2 = ZipFile.Read(simplyupdate))
+            {
+                foreach (ZipEntry ex in zip2)
+                {
+                    ex.Extract(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
+                }
+            }
+
+            Process.Start("SimplyUpdate.exe");
         }
 
         private void playBtn_Click(object sender, EventArgs e)
         {
-            BlueRose.StartFSO("FreeSO.exe");
+            BlueRose.StartFSO("FreeSO.exe", parmaBox.Text);
+           
         }
 
         private void devBtn_Click(object sender, EventArgs e)
         {
-            BlueRose.StartFSO("FSO.IDE.exe");
+            BlueRose.StartFSO("FSO.IDE.exe", parmaBox.Text);
         }
 
         private void Form1_Load(object sender, EventArgs e)

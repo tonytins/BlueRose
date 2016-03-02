@@ -23,6 +23,7 @@ using Ionic.Zip;
 using System.Net;
 using BlueRose.Distro;
 using System.Net.NetworkInformation;
+using System.Text;
 
 namespace BlueRose
 {
@@ -83,13 +84,14 @@ namespace BlueRose
         /// <param name="fso"></param>
         public static void StartFSO(string fso)
         {
-            
+
             try
             {
                 Process fsoProcess = new Process();
 
                 fsoProcess.StartInfo.FileName = fso;
                 fsoProcess.StartInfo.UseShellExecute = true;
+                fsoProcess.StartInfo.Arguments = ConvertStringArrayToString(fsoParmas);
                 fsoProcess.Start();
 
             }
@@ -97,8 +99,25 @@ namespace BlueRose
             {
                 MessageBox.Show(ex.Message, fso);
             }
-            
+        }
 
+        public static void StartFSO(string fso, string args)
+        {
+
+            try
+            {
+                Process fsoProcess = new Process();
+
+                fsoProcess.StartInfo.FileName = fso;
+                fsoProcess.StartInfo.UseShellExecute = true;
+                fsoProcess.StartInfo.Arguments = args;
+                fsoProcess.Start();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, fso);
+            }
         }
 
         /// <summary>
@@ -223,6 +242,30 @@ namespace BlueRose
                 }
             }
         }
+
+        public static string ConvertStringArrayToString(string[] array)
+        {
+            //
+            // Concatenate all the elements into a StringBuilder.
+            //
+            StringBuilder builder = new StringBuilder();
+            foreach (string value in array)
+            {
+                builder.Append(value);
+                builder.Append(' ');
+            }
+            return builder.ToString();
+        }
+
+        public static string ConvertStringArrayToStringJoin(string[] array)
+        {
+            //
+            // Use string Join to concatenate the string elements.
+            //
+            string result = string.Join(".", array);
+            return result;
+        }
+
 
         public static void distUnZip(string dist)
         {

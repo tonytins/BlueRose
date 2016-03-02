@@ -19,8 +19,13 @@ using Ionic.Zip;
 using System;
 using System.IO;
 using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using SysIO = System.IO;
+using html = HtmlAgilityPack;
+using System.Collections.Generic;
 
 namespace BlueRose.Distro
 {
@@ -76,6 +81,24 @@ namespace BlueRose.Distro
             sLine = fll.Remove(0, 855);
             sLine = sLine.Remove(sLine.IndexOf("</a>"));
             return sLine;
+        }
+
+        /// <summary>
+        /// Html parser version.
+        /// </summary>
+        /// <param name="website"></param>
+        /// <returns></returns>
+        public static async Task<string> distNum(string website)
+        {
+            HttpClient http = new HttpClient();
+            var reponse = await http.GetByteArrayAsync(website);
+            String source = Encoding.GetEncoding("dist-").GetString(reponse, 0, reponse.Length - 1);
+            source = WebUtility.HtmlDecode(source);
+            html.HtmlDocument result = new html.HtmlDocument();
+            result.LoadHtml(source);
+
+            // List<html.HtmlNode> title = result.DocumentNode.Descendants().
+            return "";
         }
 
         /// <summary>

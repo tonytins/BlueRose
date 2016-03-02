@@ -38,7 +38,7 @@
             this.latestBuild = new System.Windows.Forms.Label();
             this.onlineBuildLabel = new System.Windows.Forms.Label();
             this.fsoLogo = new System.Windows.Forms.PictureBox();
-            this.legacyLabel = new System.Windows.Forms.Label();
+            this.parmaBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.fsoLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -129,14 +129,12 @@
             this.fsoLogo.TabIndex = 18;
             this.fsoLogo.TabStop = false;
             // 
-            // legacyLabel
+            // parmaBox
             // 
-            this.legacyLabel.AutoSize = true;
-            this.legacyLabel.Location = new System.Drawing.Point(25, 200);
-            this.legacyLabel.Name = "legacyLabel";
-            this.legacyLabel.Size = new System.Drawing.Size(79, 13);
-            this.legacyLabel.TabIndex = 19;
-            this.legacyLabel.Text = "Blue Rose LTS";
+            this.parmaBox.Location = new System.Drawing.Point(8, 198);
+            this.parmaBox.Name = "parmaBox";
+            this.parmaBox.Size = new System.Drawing.Size(116, 20);
+            this.parmaBox.TabIndex = 19;
             // 
             // BlueRoseGUI
             // 
@@ -144,8 +142,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(132, 222);
-            this.Controls.Add(this.legacyLabel);
+            this.ClientSize = new System.Drawing.Size(132, 228);
+            this.Controls.Add(this.parmaBox);
             this.Controls.Add(this.fsoLogo);
             this.Controls.Add(this.onlineBuildLabel);
             this.Controls.Add(this.latestBuild);
@@ -179,7 +177,7 @@
         private System.Windows.Forms.Label latestBuild;
         private System.Windows.Forms.Label onlineBuildLabel;
         private System.Windows.Forms.PictureBox fsoLogo;
-        private System.Windows.Forms.Label legacyLabel;
+        private System.Windows.Forms.TextBox parmaBox;
     }
 }
 

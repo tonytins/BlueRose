@@ -22,6 +22,7 @@ using System.Text.RegularExpressions;
 using Ionic.Zip;
 using System.Net;
 using BlueRose.Distro;
+using System.Net.NetworkInformation;
 
 namespace BlueRose
 {
@@ -30,10 +31,14 @@ namespace BlueRose
 
         public static string[] fsoParmas { get; set; }
 
-        public static Uri teamCityUri(string address = "servo.freeso.org", string buildType = "ProjectDollhouse_TsoClient", string buildId = "316")
+        public static Uri teamCityDist(string address = "servo.freeso.org", string buildType = "ProjectDollhouse_TsoClient", string buildId = "316")
         {
-            // http://servo.freeso.org/repository/download/ProjectDollhouse_TsoClient/316:id/dist-241.zip
-            return new Uri(@"http://" + address + @"/repository/download/" + buildType + @"/" + buildId + @":id/dist-" + distNum() + ".zip?guest=1");
+            return new Uri(@"http://" + address + @"/repository/download/" + buildType + @"/" + buildId + @":id/dist-" + distNum() + ".zip");
+        }
+
+        public static Uri teamCityAddress(string address = "servo.freeso.org", string buildType = "ProjectDollhouse_TsoClient")
+        {
+            return new Uri(@"http://" + address + "/guestAuth/downloadArtifacts.html?buildTypeId=" + buildType + "&buildId=lastSuccessful");
         }
 
         /// <summary>
@@ -219,7 +224,16 @@ namespace BlueRose
             }
         }
 
-
+        public static void distUnZip(string dist)
+        {
+            using (ZipFile zip2 = ZipFile.Read(dist))
+            {
+                foreach (ZipEntry ex in zip2)
+                {
+                    ex.Extract(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
+                }
+            }
+        }
 
     }
 }

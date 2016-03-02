@@ -132,11 +132,11 @@
             // legacyLabel
             // 
             this.legacyLabel.AutoSize = true;
-            this.legacyLabel.Location = new System.Drawing.Point(41, 195);
+            this.legacyLabel.Location = new System.Drawing.Point(25, 200);
             this.legacyLabel.Name = "legacyLabel";
-            this.legacyLabel.Size = new System.Drawing.Size(42, 13);
+            this.legacyLabel.Size = new System.Drawing.Size(79, 13);
             this.legacyLabel.TabIndex = 19;
-            this.legacyLabel.Text = "Legacy";
+            this.legacyLabel.Text = "Blue Rose LTS";
             // 
             // BlueRoseGUI
             // 
@@ -144,7 +144,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(132, 216);
+            this.ClientSize = new System.Drawing.Size(132, 222);
             this.Controls.Add(this.legacyLabel);
             this.Controls.Add(this.fsoLogo);
             this.Controls.Add(this.onlineBuildLabel);
@@ -161,7 +161,6 @@
             this.MaximizeBox = false;
             this.Name = "BlueRoseGUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Blue Rose";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.fsoLogo)).EndInit();
             this.ResumeLayout(false);

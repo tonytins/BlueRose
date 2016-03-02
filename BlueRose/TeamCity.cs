@@ -20,6 +20,7 @@ using System;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
+using SysIO = System.IO;
 
 namespace BlueRose.Distro
 {
@@ -31,7 +32,7 @@ namespace BlueRose.Distro
         /// <param name="address"></param>
         /// <param name="buildType"></param>
         /// <param name="distFile"></param>
-        public static void tcManaged(string address, string buildType, string distFile = "teamcity.zip")
+        public static void tcManaged(string address = "servo.freeso.org", string buildType = "ProjectDollhouse_TsoClient", string distFile = "teamcity.zip")
         {
             try
             {
@@ -57,6 +58,27 @@ namespace BlueRose.Distro
         }
 
         /// <summary>
+        /// Return the latest dist number as a string
+        /// Thanks to LRB. http://forum.freeso.org/threads/974/
+        /// </summary>
+        /// <returns>sLine</returns>
+        public static string distNum()
+        {
+            string url = "http://servo.freeso.org/externalStatus.html?js=1";
+            WebRequest wrGETURL;
+            wrGETURL = WebRequest.Create(url);
+            SysIO.Stream objStream;
+            objStream = wrGETURL.GetResponse().GetResponseStream();
+            SysIO.StreamReader objReader = new SysIO.StreamReader(objStream);
+            string sLine = "";
+            string fll;
+            fll = objReader.ReadLine();
+            sLine = fll.Remove(0, 855);
+            sLine = sLine.Remove(sLine.IndexOf("</a>"));
+            return sLine;
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="distFile"></param>
@@ -64,10 +86,12 @@ namespace BlueRose.Distro
         {
             using (ZipFile buildUnpack = ZipFile.Read(distFile))
             {
-                foreach (ZipEntry ex in buildUnpack)
-                {
-                    ex.Extract(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
-                }
+                buildUnpack.ExtractAll(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
+            }
+
+            using (ZipFile build2Unpack = ZipFile.Read("dist-" + distNum() + ".zip"))
+            {
+                build2Unpack.ExtractAll(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
             }
         }
 
@@ -77,7 +101,7 @@ namespace BlueRose.Distro
         /// <param name="address"></param>
         /// <param name="buildType"></param>
         /// <param name="distFile"></param>
-        public static string tcDistFile(string address, string buildType, string distFile = "teamcity.zip")
+        public static string tcDistFile(string address = "servo.freeso.org", string buildType = "ProjectDollhouse_TsoClient", string distFile = "teamcity.zip")
         {
             try
             {
@@ -98,11 +122,11 @@ namespace BlueRose.Distro
         /// <param name="address"></param>
         /// <param name="buildType"></param>
         /// <returns></returns>
-        public static Uri tcAddress(string address, string buildType)
+        public static Uri tcAddress(string address = "servo.freeso.org", string buildType = "ProjectDollhouse_TsoClient")
         {
             try
             {
-                return new Uri(@"http://" + address + "/guestAuth/downloadArtifacts.html?buildTypeId=" + buildType + "&buildId=lastSuccessful");
+                return new Uri(@"http://" + address + "/guestAuth/downloadArtifacts.html?buildTypeId=" + buildType + "&buildId=lastSuccessful?guest=1");
             }
             catch (Exception ex)
             {

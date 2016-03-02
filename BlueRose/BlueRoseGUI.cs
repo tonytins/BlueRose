@@ -88,7 +88,7 @@ namespace BlueRose
                 
                 client.DownloadFileCompleted += new AsyncCompletedEventHandler(freeSODownloadCompleted);
 
-                client.DownloadFileAsync(BlueRose.teamCityUri(), "teamcity.zip");
+                client.DownloadFileAsync(BlueRose.teamCityAddress(), "teamcity.zip");
 
                 localBuild.Text = "...";
 
@@ -123,6 +123,8 @@ namespace BlueRose
                 devBtn.Enabled = true;
                 playBtn.Enabled = true;
 
+                BlueRose.writeBuild(buildFile);
+
                 localBuild.Text = BlueRose.readBuild(buildFile);
 
                 btnUpdate.Text = "Update FreeSO";
@@ -135,6 +137,8 @@ namespace BlueRose
                 btnUpdate.Text = errorBtn;
                 localBuild.Text = "?";
                 btnUpdate.Enabled = false;
+                devBtn.Enabled = false;
+                playBtn.Enabled = false;
             }
 
         }

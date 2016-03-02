@@ -72,6 +72,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TeamCity.cs" />
     <Compile Include="Wildcard.cs" />
     <EmbeddedResource Include="BlueRoseGUI.resx">
       <DependentUpon>BlueRoseGUI.cs</DependentUpon>
@@ -104,12 +105,6 @@
   <ItemGroup>
     <Content Include="FreeSO.ico" />
     <Content Include="Generic.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BlueRose.Distro\BlueRose.Distro.csproj">
-      <Project>{5c2ba9fe-c9fd-4243-b906-8e08f8d8aae5}</Project>
-      <Name>BlueRose.Distro</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

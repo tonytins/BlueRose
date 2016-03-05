@@ -21,6 +21,7 @@ using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using Ionic.Zip;
 using System.Net;
+using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Collections;
@@ -33,7 +34,32 @@ namespace BlueRose
         public static string[] fsoParmas { get; set; }
 
         public static string appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-        
+
+        /// <summary>
+        /// Returns all files by their extensions within the current directory.
+        /// You only need to type in the name of the extension.
+        /// </summary>
+        /// <param name="fileExt"></param>
+        /// <returns></returns>
+        public static FileInfo[] FileWildCard(string fileExt)
+        {
+            DirectoryInfo dir = new DirectoryInfo(Environment.CurrentDirectory);
+            FileInfo[] files = dir.GetFiles("*." + fileExt.ToLower()).Where(p => p.Extension == "." + fileExt.ToLower()).ToArray();
+            return files;
+        }
+
+        /// <summary>
+        /// Returns all files by their extensions in the selected directory.
+        /// </summary>
+        /// <param name="fileExt"></param>
+        /// <returns></returns>
+        public static FileInfo[] FileWildCard(string fileExt, string fileDir)
+        {
+            DirectoryInfo dir = new DirectoryInfo(fileDir);
+            FileInfo[] files = dir.GetFiles("*." + fileExt.ToLower()).Where(p => p.Extension == "." + fileExt.ToLower()).ToArray();
+            return files;
+        }
+
         /// <summary>
         /// Returns a given URL. If it isn't there,
         /// defualt to Google.
@@ -181,9 +207,10 @@ namespace BlueRose
         }
 
         /// <summary>
-        /// Cleans up downloaded files.
+        /// Cleans up any ZIP files.
+        /// Uses Code Project's Wildcard class.
         /// </summary>
-        public static void ZipGC()
+        public static void ZipGcCompat()
         {
             
             Wildcard wildZip = new Wildcard("*.zip", RegexOptions.IgnoreCase);
@@ -199,9 +226,31 @@ namespace BlueRose
         }
 
         /// <summary>
-        /// Detects for any present zips and unpacks them.
+        /// Cleans up any ZIP files.
         /// </summary>
-        public static void WildUnZipLegacy()
+        public static void ZipGC()
+        {
+            FileInfo[] files = FileWildCard("zip");
+
+            foreach (FileInfo file in files)
+            {
+                try
+                {
+                    file.Attributes = FileAttributes.Normal;
+                    File.Delete(file.FullName);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Detects for any present zips and unpacks them.
+        /// Uses Code Project's Wildcard class.
+        /// </summary>
+        public static void WildUnZipCompat()
         {
             Wildcard unpacker = new Wildcard("*.zip", RegexOptions.IgnoreCase);
 
@@ -224,11 +273,23 @@ namespace BlueRose
         }
 
         /// <summary>
-        /// 
+        /// Detects for any present zips and unpacks them.
         /// </summary>
         public static void wildUnZip()
         {
-            
+            DirectoryInfo dir = new DirectoryInfo(Environment.CurrentDirectory);
+            FileInfo[] files = dir.GetFiles("*.zip").Where(p => p.Extension == ".zip").ToArray();
+
+            foreach (FileInfo file in files)
+            {
+                using (ZipFile zip2 = ZipFile.Read(file.FullName))
+                {
+                    foreach (ZipEntry ex in zip2)
+                    {
+                        ex.Extract(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
+                    }
+                }
+            }
         }
 
         /// <summary>

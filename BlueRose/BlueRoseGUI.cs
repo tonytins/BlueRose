@@ -41,29 +41,6 @@ namespace BlueRose
                 this.MaximizeBox = false;
                 this.MinimizeBox = false;
 
-                blueRoseVersionLabel.Text = "v" + WhiteRose.appVersion;
-
-#if DEBUG
-                Ping pinger = new Ping();
-                bool pingable = false;
-
-                try
-                {
-                    PingReply reply = pinger.Send(blupdateraddress);
-                    if (pingable = reply.Status == IPStatus.Success)
-                    {
-                        client.DownloadFileCompleted += new AsyncCompletedEventHandler(updaterdownload);
-
-                        client.DownloadFileAsync(new Uri(blupdateraddress), simplyupdate);
-                    }
-                }
-                catch (PingException ex)
-                {
-
-                    MessageBox.Show(ex.Message);
-
-                }
-#endif
             }
             catch (Exception ex)
             {
@@ -96,7 +73,7 @@ namespace BlueRose
             WhiteRose.StartFSO("FSO.IDE.exe", parmaBox.Text);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void BlueRoseGUI_Load(object sender, EventArgs e)
         {
             WhiteRose.ZipGC();
 
@@ -104,6 +81,29 @@ namespace BlueRose
             {
                 localBuild.Text = WhiteRose.ReadBuild(buildFile);
                 onlineBuildLabel.Text = "#" + WhiteRose.DistNumLegacy();
+                blueRoseVersionLabel.Text = "v" + WhiteRose.appVersion;
+
+#if DEBUG
+                Ping pinger = new Ping();
+                bool pingable = false;
+
+                try
+                {
+                    PingReply reply = pinger.Send(blupdateraddress);
+                    if (pingable = reply.Status == IPStatus.Success)
+                    {
+                        client.DownloadFileCompleted += new AsyncCompletedEventHandler(updaterdownload);
+
+                        client.DownloadFileAsync(new Uri(blupdateraddress), simplyupdate);
+                    }
+                }
+                catch (PingException ex)
+                {
+
+                    MessageBox.Show(ex.Message);
+
+                }
+#endif
             }
             catch
             {
@@ -121,7 +121,7 @@ namespace BlueRose
 
             try
             {
-                WhiteRose.ZipGC();
+                WhiteRose.ZipGcCompat();
                 
                 client.DownloadFileCompleted += new AsyncCompletedEventHandler(freeSODownloadCompleted);
 

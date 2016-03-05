@@ -124,7 +124,7 @@ namespace BlueRose
 
             File.Delete(distFile);
 
-            WhiteRose.WildUnZipLegacy();
+            WhiteRose.WildUnZipCompat();
 
             /* using (ZipFile build2Unpack = ZipFile.Read("dist-" + distNum() + ".zip"))
             {

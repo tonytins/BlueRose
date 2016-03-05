@@ -1,6 +1,6 @@
-Name "Blue Rose 2.0 Stable"
+Name "Blue Rose 2.1 Slim"
 
-Outfile "BlueRoseStable.exe"
+Outfile "BlueRoseOnline.exe"
 
 RequestExecutionLevel admin
 
@@ -13,13 +13,11 @@ Section "Main"
 
 	SetOutPath '$INSTDIR'
 
-	File "BlueRose\bin\Release\BlueRoseLauncher.exe"
-	File "BlueRose\bin\Release\BlueRoseLauncher.exe.config"
-	File "BlueRose\bin\Release\BlueRoseLauncher.pdb"
-	File "BlueRose\bin\Release\BlueRose.Distro.dll"
-	File "BlueRose\bin\Release\BlueRose.Distro.pdb"
-	File "BlueRose\bin\Release\Ionic.Zip.dll"
-	File "BlueRose\bin\Release\Ionic.Zip.xml"
+	File "BlueRoseUpdate\bin\Release\SimplyUpdate.exe"
+	File "BlueRoseUpdate\bin\Release\SimplyUpdate.exe.config"
+	File "BlueRoseUpdate\bin\Release\SimplyUpdate.pdb"
+	File "BlueRoseUpdate\bin\Release\ZACKUpdater.dll"
+	File "BlueRoseUpdate\bin\Release\ZACKUpdater.pdb"
 	
 	 # create the uninstaller
     WriteUninstaller "$INSTDIR\Uninstall Blue Rose.exe"
@@ -41,10 +39,13 @@ Section "Uninstall"
 	Delete "$INSTDIR\BlueRoseLauncher.exe"
 	Delete "$INSTDIR\BlueRoseLauncher.exe.config"
 	Delete "$INSTDIR\BlueRoseLauncher.pdb"
-	Delete "$INSTDIR\BlueRose.Distro.dll"
-	Delete "$INSTDIR\BlueRose.Distro.pdb"
 	Delete "$INSTDIR\Ionic.Zip.dll"
 	Delete "$INSTDIR\Ionic.Zip.xml"
+	Delete "$INSTDIR\SimplyUpdate.exe"
+	Delete "$INSTDIR\SimplyUpdate.exe.config"
+	Delete "$INSTDIR\SimplyUpdate.pdb"
+	Delete "$INSTDIR\ZACKUpdater.dll"
+	Delete "$INSTDIR\ZACKUpdater.xml"
 	Delete "$INSTDIR\Uninstall BlueRoseLauncher.exe"
  
     # second, the shortcuts

@@ -20,6 +20,7 @@ using System.Net;
 using System.Windows.Forms;
 using Ionic.Zip;
 using System.Diagnostics;
+using System.IO;
 
 namespace BlueRose
 {
@@ -76,6 +77,14 @@ namespace BlueRose
         private void BlueRoseGUI_Load(object sender, EventArgs e)
         {
             WhiteRose.ZipGC();
+
+            string distroDLL = "BlueRose.Distro.dll";
+            string distroPdb = "BlueRose.Distro.pdb";
+            if (File.Exists(distroDLL) && File.Exists(distroPdb))
+            {
+                File.Delete(distroDLL);
+                File.Delete(distroPdb);
+            }
 
             try
             {

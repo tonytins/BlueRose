@@ -16,39 +16,31 @@
 
 using System;
 using System.Diagnostics;
-using SysIO = System.IO;
+using System.IO;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using Ionic.Zip;
 using System.Net;
-using BlueRose.Distro;
 using System.Net.NetworkInformation;
 using System.Text;
-
+using System.Collections;
+using System.Reflection;
 namespace BlueRose
 {
-    public class BlueRose
+    public class WhiteRose
     {
 
         public static string[] fsoParmas { get; set; }
 
-        public static Uri teamCityDist(string address = "servo.freeso.org", string buildType = "ProjectDollhouse_TsoClient", string buildId = "316")
-        {
-            return new Uri(@"http://" + address + @"/repository/download/" + buildType + @"/" + buildId + @":id/dist-" + distNum() + ".zip");
-        }
-
-        public static Uri teamCityAddress(string address = "servo.freeso.org", string buildType = "ProjectDollhouse_TsoClient")
-        {
-            return new Uri(@"http://" + address + "/guestAuth/downloadArtifacts.html?buildTypeId=" + buildType + "&buildId=lastSuccessful");
-        }
-
+        public static string appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        
         /// <summary>
         /// Returns a given URL. If it isn't there,
         /// defualt to Google.
         /// </summary>
         /// <param name="url"></param>
         /// <returns>new Uri(url);</returns>
-        public static Uri webPage(string url)
+        public static Uri WebPage(string url)
         {
             try
             {
@@ -65,7 +57,7 @@ namespace BlueRose
         /// </summary>
         /// <param name="url"></param>
         /// <returns>new Uri(url);</returns>
-        public static Uri webURL(string url)
+        public static Uri WebURI(string url)
         {
             try
             {
@@ -125,14 +117,14 @@ namespace BlueRose
         /// Thanks to LRB. http://forum.freeso.org/threads/974/
         /// </summary>
         /// <returns>sLine</returns>
-        public static string distNum()
+        public static string DistNumLegacy()
         {
             string url = "http://servo.freeso.org/externalStatus.html?js=1";
             WebRequest wrGETURL;
             wrGETURL = WebRequest.Create(url);
-            SysIO.Stream objStream;
+            Stream objStream;
             objStream = wrGETURL.GetResponse().GetResponseStream();
-            SysIO.StreamReader objReader = new SysIO.StreamReader(objStream);
+            StreamReader objReader = new StreamReader(objStream);
             string sLine = "";
             string fll;
             fll = objReader.ReadLine();
@@ -146,14 +138,14 @@ namespace BlueRose
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
-        public static string readBuild(string file)
+        public static string ReadBuild(string file)
         {
             string line;
 
             try
             {
                 string buildFile = Environment.CurrentDirectory + @"/" + file;
-                SysIO.StreamReader fileRead = new SysIO.StreamReader(buildFile);
+                StreamReader fileRead = new StreamReader(buildFile);
                 while ((line = fileRead.ReadLine()) != null)
                 {
                     return "#" + line;
@@ -173,14 +165,14 @@ namespace BlueRose
         /// 
         /// </summary>
         /// <param name="file"></param>
-        public static void writeBuild(string file)
+        public static void WriteBuild(string file)
         {
             string buildFile = Environment.CurrentDirectory + @"/" + file;
-            string localDist = distNum();
+            string localDist = DistNumLegacy();
 
             try
             {
-                SysIO.File.WriteAllText(buildFile, localDist);
+                File.WriteAllText(buildFile, localDist);
             }
             catch (Exception ex)
             {
@@ -191,29 +183,17 @@ namespace BlueRose
         /// <summary>
         /// Cleans up downloaded files.
         /// </summary>
-        public static void GC()
+        public static void ZipGC()
         {
-            string htmlOutput = "downloadArtifacts.html";
-            string brLegacyInstaller = "BlueRoseStable.exe";
-            string brUpdateInstaller = "BlueRoseUpdate.exe";
-
-            if (SysIO.File.Exists(brLegacyInstaller))
-                SysIO.File.Delete(brLegacyInstaller);
-
-            if (SysIO.File.Exists(brUpdateInstaller))
-                SysIO.File.Delete(brUpdateInstaller);
-
-            if (SysIO.File.Exists(htmlOutput))
-                SysIO.File.Delete(htmlOutput);
-
+            
             Wildcard wildZip = new Wildcard("*.zip", RegexOptions.IgnoreCase);
-            string[] files = SysIO.Directory.GetFiles(Environment.CurrentDirectory);
+            string[] files = Directory.GetFiles(Environment.CurrentDirectory);
 
             foreach (string file in files)
             {
                 if (wildZip.IsMatch(file))
                 {
-                    SysIO.File.Delete(file);
+                    File.Delete(file);
                 }
             }
         }
@@ -221,12 +201,12 @@ namespace BlueRose
         /// <summary>
         /// Detects for any present zips and unpacks them.
         /// </summary>
-        public static void wildUnZip()
+        public static void WildUnZipLegacy()
         {
             Wildcard unpacker = new Wildcard("*.zip", RegexOptions.IgnoreCase);
 
             // Get a list of files in the My Documents folder
-            string[] files = SysIO.Directory.GetFiles(Environment.CurrentDirectory);
+            string[] files = Directory.GetFiles(Environment.CurrentDirectory);
 
             foreach (string file in files)
             {
@@ -243,6 +223,19 @@ namespace BlueRose
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public static void wildUnZip()
+        {
+            
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="array"></param>
+        /// <returns></returns>
         public static string ConvertStringArrayToString(string[] array)
         {
             //
@@ -257,6 +250,11 @@ namespace BlueRose
             return builder.ToString();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="array"></param>
+        /// <returns></returns>
         public static string ConvertStringArrayToStringJoin(string[] array)
         {
             //

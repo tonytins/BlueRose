@@ -20,8 +20,6 @@ using System.Net;
 using System.Windows.Forms;
 using Ionic.Zip;
 using System.Diagnostics;
-using BlueRose.Distro;
-using System.Net.NetworkInformation;
 
 namespace BlueRose
 {
@@ -29,7 +27,7 @@ namespace BlueRose
     {
         private string errorBtn = "ERROR";
         WebClient client = new WebClient();
-        string netBuild = "#" + BlueRose.distNum();
+        string netBuild = "#" + WhiteRose.DistNumLegacy();
         string buildFile = "fsobuild";
         string simplyupdate = "simplyupdate.zip";
         string blupdateraddress = "https://dl.dropboxusercontent.com/u/42345729/blupdater.zip";
@@ -43,6 +41,9 @@ namespace BlueRose
                 this.MaximizeBox = false;
                 this.MinimizeBox = false;
 
+                blueRoseVersionLabel.Text = "v" + WhiteRose.appVersion;
+
+#if DEBUG
                 Ping pinger = new Ping();
                 bool pingable = false;
 
@@ -58,11 +59,11 @@ namespace BlueRose
                 }
                 catch (PingException ex)
                 {
-#if DEBUG
-                    MessageBox.Show(ex.Message);
-#endif
-                }
 
+                    MessageBox.Show(ex.Message);
+
+                }
+#endif
             }
             catch (Exception ex)
             {
@@ -86,23 +87,23 @@ namespace BlueRose
 
         private void playBtn_Click(object sender, EventArgs e)
         {
-            BlueRose.StartFSO("FreeSO.exe", parmaBox.Text);
+            WhiteRose.StartFSO("FreeSO.exe", parmaBox.Text);
            
         }
 
         private void devBtn_Click(object sender, EventArgs e)
         {
-            BlueRose.StartFSO("FSO.IDE.exe", parmaBox.Text);
+            WhiteRose.StartFSO("FSO.IDE.exe", parmaBox.Text);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            BlueRose.GC();
+            WhiteRose.ZipGC();
 
             try
             {
-                localBuild.Text = BlueRose.readBuild(buildFile);
-                onlineBuildLabel.Text = "#" + BlueRose.distNum();
+                localBuild.Text = WhiteRose.ReadBuild(buildFile);
+                onlineBuildLabel.Text = "#" + WhiteRose.DistNumLegacy();
             }
             catch
             {
@@ -120,11 +121,11 @@ namespace BlueRose
 
             try
             {
-                BlueRose.GC();
+                WhiteRose.ZipGC();
                 
                 client.DownloadFileCompleted += new AsyncCompletedEventHandler(freeSODownloadCompleted);
 
-                client.DownloadFileAsync(BlueRose.teamCityAddress(), "teamcity.zip");
+                client.DownloadFileAsync(TeamCity.teamCityAddress(), "teamcity.zip");
 
                 localBuild.Text = "...";
 
@@ -159,9 +160,9 @@ namespace BlueRose
                 devBtn.Enabled = true;
                 playBtn.Enabled = true;
 
-                BlueRose.writeBuild(buildFile);
+                WhiteRose.WriteBuild(buildFile);
 
-                localBuild.Text = BlueRose.readBuild(buildFile);
+                localBuild.Text = WhiteRose.ReadBuild(buildFile);
 
                 btnUpdate.Text = "Update FreeSO";
             }
@@ -211,7 +212,7 @@ namespace BlueRose
         {
             try
             {
-                onlineBuildLabel.Text = "#" + BlueRose.distNum();
+                onlineBuildLabel.Text = "#" + WhiteRose.DistNumLegacy();
             }
             catch
             {

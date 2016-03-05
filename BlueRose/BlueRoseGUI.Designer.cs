@@ -39,6 +39,7 @@
             this.onlineBuildLabel = new System.Windows.Forms.Label();
             this.fsoLogo = new System.Windows.Forms.PictureBox();
             this.parmaBox = new System.Windows.Forms.TextBox();
+            this.blueRoseVersionLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fsoLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -136,13 +137,24 @@
             this.parmaBox.Size = new System.Drawing.Size(116, 20);
             this.parmaBox.TabIndex = 19;
             // 
+            // blueRoseVersionLabel
+            // 
+            this.blueRoseVersionLabel.AutoSize = true;
+            this.blueRoseVersionLabel.Location = new System.Drawing.Point(23, 228);
+            this.blueRoseVersionLabel.Name = "blueRoseVersionLabel";
+            this.blueRoseVersionLabel.Size = new System.Drawing.Size(82, 13);
+            this.blueRoseVersionLabel.TabIndex = 20;
+            this.blueRoseVersionLabel.Text = "Version Number";
+            this.blueRoseVersionLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // BlueRoseGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(132, 228);
+            this.ClientSize = new System.Drawing.Size(132, 250);
+            this.Controls.Add(this.blueRoseVersionLabel);
             this.Controls.Add(this.parmaBox);
             this.Controls.Add(this.fsoLogo);
             this.Controls.Add(this.onlineBuildLabel);
@@ -178,6 +190,7 @@
         private System.Windows.Forms.Label onlineBuildLabel;
         private System.Windows.Forms.PictureBox fsoLogo;
         private System.Windows.Forms.TextBox parmaBox;
+        private System.Windows.Forms.Label blueRoseVersionLabel;
     }
 }
 

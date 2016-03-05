@@ -24,13 +24,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SysIO = System.IO;
-using html = HtmlAgilityPack;
 using System.Collections.Generic;
 
-namespace BlueRose.Distro
+namespace BlueRose
 {
     public class TeamCity
     {
+
+        public static Uri teamCityDist(string address = "servo.freeso.org", string buildType = "ProjectDollhouse_TsoClient", string buildId = "316")
+        {
+            return new Uri(@"http://" + address + @"/repository/download/" + buildType + @"/" + buildId + @":id/dist-" + WhiteRose.DistNumLegacy() + ".zip");
+        }
+
+        public static Uri teamCityAddress(string address = "servo.freeso.org", string buildType = "ProjectDollhouse_TsoClient")
+        {
+            return new Uri(@"http://" + address + "/guestAuth/downloadArtifacts.html?buildTypeId=" + buildType + "&buildId=lastSuccessful");
+        }
+
         /// <summary>
         /// Downloads and extracts teamcity.zip into the current directory.
         /// </summary>
@@ -94,8 +104,8 @@ namespace BlueRose.Distro
             var reponse = await http.GetByteArrayAsync(website);
             String source = Encoding.GetEncoding("dist-").GetString(reponse, 0, reponse.Length - 1);
             source = WebUtility.HtmlDecode(source);
-            html.HtmlDocument result = new html.HtmlDocument();
-            result.LoadHtml(source);
+            // html.HtmlDocument result = new html.HtmlDocument();
+            // result.LoadHtml(source);
 
             // List<html.HtmlNode> title = result.DocumentNode.Descendants().
             return "";
@@ -112,10 +122,14 @@ namespace BlueRose.Distro
                 buildUnpack.ExtractAll(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
             }
 
-            using (ZipFile build2Unpack = ZipFile.Read("dist-" + distNum() + ".zip"))
+            File.Delete(distFile);
+
+            WhiteRose.WildUnZipLegacy();
+
+            /* using (ZipFile build2Unpack = ZipFile.Read("dist-" + distNum() + ".zip"))
             {
                 build2Unpack.ExtractAll(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
-            }
+            } */
         }
 
         /// <summary>

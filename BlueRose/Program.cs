@@ -30,7 +30,7 @@ namespace BlueRose
         [STAThread]
         static void Main(string[] args)
         {
-            BlueRose.fsoParmas = args;
+            WhiteRose.fsoParmas = args;
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

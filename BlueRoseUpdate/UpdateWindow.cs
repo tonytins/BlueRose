@@ -10,7 +10,7 @@ namespace SimplyUpdate
     public partial class UpdateWindow : Form
     {
         Uri address = new Uri(@"https://dl.dropboxusercontent.com/u/42345729/bluerose.zip");
-        string program = "BlueRoseLauncher.exe";
+        static string program = "BlueRoseLauncher.exe";
         public static string[] updateParmas { get; set; }
 
         public UpdateWindow()
@@ -32,17 +32,23 @@ namespace SimplyUpdate
                 MessageBox.Show(ex.Message);
                 try
                 {
-                    Process fsoProcess = new Process();
+                    Process launcherProcess = new Process();
 
-                    fsoProcess.StartInfo.FileName = program;
-                    fsoProcess.StartInfo.UseShellExecute = true;
-                    fsoProcess.StartInfo.Arguments = Program.ConvertStringArrayToString(updateParmas);
-                    fsoProcess.Start();
+                    launcherProcess.StartInfo.FileName = program;
+                    launcherProcess.StartInfo.UseShellExecute = true;
+                    launcherProcess.Start();
                     Application.Exit();
                 }
                 catch
                 {
-                    Application.Exit();
+                    try
+                    {
+                        Application.Exit();
+                    }
+                    catch
+                    {
+                        Environment.Exit(0);
+                    }
                 }
             }
         }

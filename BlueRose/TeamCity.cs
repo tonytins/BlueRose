@@ -23,8 +23,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SysIO = System.IO;
-using System.Collections.Generic;
 
 namespace BlueRose
 {
@@ -82,9 +80,9 @@ namespace BlueRose
             string url = "http://servo.freeso.org/externalStatus.html?js=1";
             WebRequest wrGETURL;
             wrGETURL = WebRequest.Create(url);
-            SysIO.Stream objStream;
+            Stream objStream;
             objStream = wrGETURL.GetResponse().GetResponseStream();
-            SysIO.StreamReader objReader = new SysIO.StreamReader(objStream);
+            StreamReader objReader = new StreamReader(objStream);
             string sLine = "";
             string fll;
             fll = objReader.ReadLine();
@@ -124,7 +122,7 @@ namespace BlueRose
 
             File.Delete(distFile);
 
-            WhiteRose.WildUnZipCompat();
+            WhiteRose.wildUnZip();
 
             /* using (ZipFile build2Unpack = ZipFile.Read("dist-" + distNum() + ".zip"))
             {

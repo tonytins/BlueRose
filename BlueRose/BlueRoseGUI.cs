@@ -21,6 +21,7 @@ using System.Windows.Forms;
 using Ionic.Zip;
 using System.Diagnostics;
 using System.IO;
+using System.Net.NetworkInformation;
 
 namespace BlueRose
 {
@@ -31,7 +32,7 @@ namespace BlueRose
         string netBuild = "#" + WhiteRose.DistNumLegacy();
         string buildFile = "fsobuild";
         string simplyupdate = "simplyupdate.zip";
-        string blupdateraddress = "https://dl.dropboxusercontent.com/u/42345729/blupdater.zip";
+        string blupdateraddress = "https://dl.dropboxusercontent.com/u/42345729/simplyupdateb.zip";
 
         public BlueRoseGUI()
         {
@@ -90,7 +91,7 @@ namespace BlueRose
             {
                 localBuild.Text = WhiteRose.ReadBuild(buildFile);
                 onlineBuildLabel.Text = "#" + WhiteRose.DistNumLegacy();
-                blueRoseVersionLabel.Text = "v" + WhiteRose.appVersion;
+                blueRoseVersionLabel.Text = "Blue Rose v" + WhiteRose.appVersion;
 
 #if DEBUG
                 Ping pinger = new Ping();
@@ -108,8 +109,8 @@ namespace BlueRose
                 }
                 catch (PingException ex)
                 {
-
-                    MessageBox.Show(ex.Message);
+                    Console.WriteLine(ex.Message);
+                    // MessageBox.Show(ex.Message);
 
                 }
 #endif
@@ -133,15 +134,13 @@ namespace BlueRose
                 WhiteRose.ZipGcCompat();
                 
                 client.DownloadFileCompleted += new AsyncCompletedEventHandler(freeSODownloadCompleted);
-
                 client.DownloadFileAsync(TeamCity.teamCityAddress(), "teamcity.zip");
-
-                localBuild.Text = "...";
-
-                btnUpdate.Text = "Downloading";
+                idleProgressBar.Style = ProgressBarStyle.Marquee;
+                btnUpdate.Text = "Update FreeSO";
                 btnUpdate.Enabled = false;
                 devBtn.Enabled = false;
                 playBtn.Enabled = false;
+                btnUpdateLauncher.Enabled = false;
 
             }
             catch (Exception ex)
@@ -166,14 +165,14 @@ namespace BlueRose
                 TeamCity.tcUnpack();
 
                 btnUpdate.Enabled = true;
+                btnUpdateLauncher.Enabled = true;
                 devBtn.Enabled = true;
                 playBtn.Enabled = true;
 
                 WhiteRose.WriteBuild(buildFile);
 
                 localBuild.Text = WhiteRose.ReadBuild(buildFile);
-
-                btnUpdate.Text = "Update FreeSO";
+                idleProgressBar.Style = ProgressBarStyle.Blocks;
             }
             catch (Exception ex)
             {
@@ -188,11 +187,7 @@ namespace BlueRose
             }
 
         }
-
-        private void dwnPrgBar_Click(object sender, EventArgs e)
-        {
-            
-        }
+        
 
         private void btnUpdateLauncher_Click(object sender, EventArgs e)
         {

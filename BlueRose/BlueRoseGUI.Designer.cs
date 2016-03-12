@@ -37,17 +37,17 @@
             this.versionIS = new System.Windows.Forms.Label();
             this.latestBuild = new System.Windows.Forms.Label();
             this.onlineBuildLabel = new System.Windows.Forms.Label();
-            this.fsoLogo = new System.Windows.Forms.PictureBox();
             this.parmaBox = new System.Windows.Forms.TextBox();
             this.blueRoseVersionLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.fsoLogo)).BeginInit();
+            this.idleProgressBar = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // playBtn
             // 
-            this.playBtn.Location = new System.Drawing.Point(9, 111);
+            this.playBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.playBtn.Location = new System.Drawing.Point(259, 32);
             this.playBtn.Name = "playBtn";
-            this.playBtn.Size = new System.Drawing.Size(50, 23);
+            this.playBtn.Size = new System.Drawing.Size(107, 47);
             this.playBtn.TabIndex = 0;
             this.playBtn.Text = "Play";
             this.playBtn.UseVisualStyleBackColor = true;
@@ -55,9 +55,9 @@
             // 
             // devBtn
             // 
-            this.devBtn.Location = new System.Drawing.Point(65, 111);
+            this.devBtn.Location = new System.Drawing.Point(135, 32);
             this.devBtn.Name = "devBtn";
-            this.devBtn.Size = new System.Drawing.Size(60, 23);
+            this.devBtn.Size = new System.Drawing.Size(116, 21);
             this.devBtn.TabIndex = 1;
             this.devBtn.Text = "Develop";
             this.devBtn.UseVisualStyleBackColor = true;
@@ -65,9 +65,9 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(8, 140);
+            this.btnUpdate.Location = new System.Drawing.Point(7, 59);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(116, 23);
+            this.btnUpdate.Size = new System.Drawing.Size(116, 21);
             this.btnUpdate.TabIndex = 5;
             this.btnUpdate.Text = "Update FreeSO";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -75,9 +75,9 @@
             // 
             // btnUpdateLauncher
             // 
-            this.btnUpdateLauncher.Location = new System.Drawing.Point(8, 169);
+            this.btnUpdateLauncher.Location = new System.Drawing.Point(7, 32);
             this.btnUpdateLauncher.Name = "btnUpdateLauncher";
-            this.btnUpdateLauncher.Size = new System.Drawing.Size(116, 23);
+            this.btnUpdateLauncher.Size = new System.Drawing.Size(116, 21);
             this.btnUpdateLauncher.TabIndex = 10;
             this.btnUpdateLauncher.Text = "Update Launcher";
             this.btnUpdateLauncher.UseVisualStyleBackColor = true;
@@ -86,7 +86,9 @@
             // localBuild
             // 
             this.localBuild.AutoSize = true;
-            this.localBuild.Location = new System.Drawing.Point(89, 75);
+            this.localBuild.BackColor = System.Drawing.Color.Transparent;
+            this.localBuild.ForeColor = System.Drawing.Color.Black;
+            this.localBuild.Location = new System.Drawing.Point(271, 113);
             this.localBuild.Name = "localBuild";
             this.localBuild.Size = new System.Drawing.Size(35, 13);
             this.localBuild.TabIndex = 11;
@@ -95,7 +97,9 @@
             // versionIS
             // 
             this.versionIS.AutoSize = true;
-            this.versionIS.Location = new System.Drawing.Point(9, 75);
+            this.versionIS.BackColor = System.Drawing.Color.Transparent;
+            this.versionIS.ForeColor = System.Drawing.Color.Black;
+            this.versionIS.Location = new System.Drawing.Point(191, 113);
             this.versionIS.Name = "versionIS";
             this.versionIS.Size = new System.Drawing.Size(74, 13);
             this.versionIS.TabIndex = 12;
@@ -104,7 +108,9 @@
             // latestBuild
             // 
             this.latestBuild.AutoSize = true;
-            this.latestBuild.Location = new System.Drawing.Point(9, 92);
+            this.latestBuild.BackColor = System.Drawing.Color.Transparent;
+            this.latestBuild.ForeColor = System.Drawing.Color.Black;
+            this.latestBuild.Location = new System.Drawing.Point(57, 113);
             this.latestBuild.Name = "latestBuild";
             this.latestBuild.Size = new System.Drawing.Size(64, 13);
             this.latestBuild.TabIndex = 13;
@@ -113,50 +119,51 @@
             // onlineBuildLabel
             // 
             this.onlineBuildLabel.AutoSize = true;
-            this.onlineBuildLabel.Location = new System.Drawing.Point(89, 92);
+            this.onlineBuildLabel.BackColor = System.Drawing.Color.Transparent;
+            this.onlineBuildLabel.ForeColor = System.Drawing.Color.Black;
+            this.onlineBuildLabel.Location = new System.Drawing.Point(137, 113);
             this.onlineBuildLabel.Name = "onlineBuildLabel";
             this.onlineBuildLabel.Size = new System.Drawing.Size(35, 13);
             this.onlineBuildLabel.TabIndex = 14;
             this.onlineBuildLabel.Text = "label1";
             this.onlineBuildLabel.Click += new System.EventHandler(this.onlineBuildLabel_Click);
             // 
-            // fsoLogo
-            // 
-            this.fsoLogo.Image = ((System.Drawing.Image)(resources.GetObject("fsoLogo.Image")));
-            this.fsoLogo.Location = new System.Drawing.Point(40, 12);
-            this.fsoLogo.Name = "fsoLogo";
-            this.fsoLogo.Size = new System.Drawing.Size(55, 55);
-            this.fsoLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.fsoLogo.TabIndex = 18;
-            this.fsoLogo.TabStop = false;
-            // 
             // parmaBox
             // 
-            this.parmaBox.Location = new System.Drawing.Point(8, 198);
+            this.parmaBox.Location = new System.Drawing.Point(135, 59);
             this.parmaBox.Name = "parmaBox";
-            this.parmaBox.Size = new System.Drawing.Size(116, 20);
+            this.parmaBox.Size = new System.Drawing.Size(117, 20);
             this.parmaBox.TabIndex = 19;
             // 
             // blueRoseVersionLabel
             // 
             this.blueRoseVersionLabel.AutoSize = true;
-            this.blueRoseVersionLabel.Location = new System.Drawing.Point(23, 228);
+            this.blueRoseVersionLabel.BackColor = System.Drawing.Color.Transparent;
+            this.blueRoseVersionLabel.ForeColor = System.Drawing.Color.Black;
+            this.blueRoseVersionLabel.Location = new System.Drawing.Point(284, 9);
             this.blueRoseVersionLabel.Name = "blueRoseVersionLabel";
             this.blueRoseVersionLabel.Size = new System.Drawing.Size(82, 13);
             this.blueRoseVersionLabel.TabIndex = 20;
             this.blueRoseVersionLabel.Text = "Version Number";
             this.blueRoseVersionLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // idleProgressBar
+            // 
+            this.idleProgressBar.Location = new System.Drawing.Point(7, 86);
+            this.idleProgressBar.Name = "idleProgressBar";
+            this.idleProgressBar.Size = new System.Drawing.Size(359, 20);
+            this.idleProgressBar.TabIndex = 21;
+            // 
             // BlueRoseGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(132, 250);
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(372, 139);
+            this.Controls.Add(this.idleProgressBar);
             this.Controls.Add(this.blueRoseVersionLabel);
             this.Controls.Add(this.parmaBox);
-            this.Controls.Add(this.fsoLogo);
             this.Controls.Add(this.onlineBuildLabel);
             this.Controls.Add(this.latestBuild);
             this.Controls.Add(this.versionIS);
@@ -166,13 +173,14 @@
             this.Controls.Add(this.devBtn);
             this.Controls.Add(this.playBtn);
             this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "BlueRoseGUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Blue Rose";
             this.Load += new System.EventHandler(this.BlueRoseGUI_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.fsoLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -188,9 +196,9 @@
         private System.Windows.Forms.Label versionIS;
         private System.Windows.Forms.Label latestBuild;
         private System.Windows.Forms.Label onlineBuildLabel;
-        private System.Windows.Forms.PictureBox fsoLogo;
         private System.Windows.Forms.TextBox parmaBox;
         private System.Windows.Forms.Label blueRoseVersionLabel;
+        private System.Windows.Forms.ProgressBar idleProgressBar;
     }
 }
 

@@ -38,14 +38,13 @@
             this.latestBuild = new System.Windows.Forms.Label();
             this.onlineBuildLabel = new System.Windows.Forms.Label();
             this.parmaBox = new System.Windows.Forms.TextBox();
-            this.blueRoseVersionLabel = new System.Windows.Forms.Label();
             this.idleProgressBar = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // playBtn
             // 
             this.playBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.playBtn.Location = new System.Drawing.Point(259, 32);
+            this.playBtn.Location = new System.Drawing.Point(262, 12);
             this.playBtn.Name = "playBtn";
             this.playBtn.Size = new System.Drawing.Size(107, 47);
             this.playBtn.TabIndex = 0;
@@ -55,7 +54,7 @@
             // 
             // devBtn
             // 
-            this.devBtn.Location = new System.Drawing.Point(135, 32);
+            this.devBtn.Location = new System.Drawing.Point(138, 12);
             this.devBtn.Name = "devBtn";
             this.devBtn.Size = new System.Drawing.Size(116, 21);
             this.devBtn.TabIndex = 1;
@@ -65,7 +64,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(7, 59);
+            this.btnUpdate.Location = new System.Drawing.Point(10, 39);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(116, 21);
             this.btnUpdate.TabIndex = 5;
@@ -75,7 +74,7 @@
             // 
             // btnUpdateLauncher
             // 
-            this.btnUpdateLauncher.Location = new System.Drawing.Point(7, 32);
+            this.btnUpdateLauncher.Location = new System.Drawing.Point(10, 12);
             this.btnUpdateLauncher.Name = "btnUpdateLauncher";
             this.btnUpdateLauncher.Size = new System.Drawing.Size(116, 21);
             this.btnUpdateLauncher.TabIndex = 10;
@@ -88,7 +87,7 @@
             this.localBuild.AutoSize = true;
             this.localBuild.BackColor = System.Drawing.Color.Transparent;
             this.localBuild.ForeColor = System.Drawing.Color.Black;
-            this.localBuild.Location = new System.Drawing.Point(271, 113);
+            this.localBuild.Location = new System.Drawing.Point(274, 93);
             this.localBuild.Name = "localBuild";
             this.localBuild.Size = new System.Drawing.Size(35, 13);
             this.localBuild.TabIndex = 11;
@@ -99,7 +98,7 @@
             this.versionIS.AutoSize = true;
             this.versionIS.BackColor = System.Drawing.Color.Transparent;
             this.versionIS.ForeColor = System.Drawing.Color.Black;
-            this.versionIS.Location = new System.Drawing.Point(191, 113);
+            this.versionIS.Location = new System.Drawing.Point(194, 93);
             this.versionIS.Name = "versionIS";
             this.versionIS.Size = new System.Drawing.Size(74, 13);
             this.versionIS.TabIndex = 12;
@@ -110,7 +109,7 @@
             this.latestBuild.AutoSize = true;
             this.latestBuild.BackColor = System.Drawing.Color.Transparent;
             this.latestBuild.ForeColor = System.Drawing.Color.Black;
-            this.latestBuild.Location = new System.Drawing.Point(57, 113);
+            this.latestBuild.Location = new System.Drawing.Point(60, 93);
             this.latestBuild.Name = "latestBuild";
             this.latestBuild.Size = new System.Drawing.Size(64, 13);
             this.latestBuild.TabIndex = 13;
@@ -121,7 +120,7 @@
             this.onlineBuildLabel.AutoSize = true;
             this.onlineBuildLabel.BackColor = System.Drawing.Color.Transparent;
             this.onlineBuildLabel.ForeColor = System.Drawing.Color.Black;
-            this.onlineBuildLabel.Location = new System.Drawing.Point(137, 113);
+            this.onlineBuildLabel.Location = new System.Drawing.Point(140, 93);
             this.onlineBuildLabel.Name = "onlineBuildLabel";
             this.onlineBuildLabel.Size = new System.Drawing.Size(35, 13);
             this.onlineBuildLabel.TabIndex = 14;
@@ -130,26 +129,14 @@
             // 
             // parmaBox
             // 
-            this.parmaBox.Location = new System.Drawing.Point(135, 59);
+            this.parmaBox.Location = new System.Drawing.Point(138, 39);
             this.parmaBox.Name = "parmaBox";
             this.parmaBox.Size = new System.Drawing.Size(117, 20);
             this.parmaBox.TabIndex = 19;
             // 
-            // blueRoseVersionLabel
-            // 
-            this.blueRoseVersionLabel.AutoSize = true;
-            this.blueRoseVersionLabel.BackColor = System.Drawing.Color.Transparent;
-            this.blueRoseVersionLabel.ForeColor = System.Drawing.Color.Black;
-            this.blueRoseVersionLabel.Location = new System.Drawing.Point(284, 9);
-            this.blueRoseVersionLabel.Name = "blueRoseVersionLabel";
-            this.blueRoseVersionLabel.Size = new System.Drawing.Size(82, 13);
-            this.blueRoseVersionLabel.TabIndex = 20;
-            this.blueRoseVersionLabel.Text = "Version Number";
-            this.blueRoseVersionLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
             // idleProgressBar
             // 
-            this.idleProgressBar.Location = new System.Drawing.Point(7, 86);
+            this.idleProgressBar.Location = new System.Drawing.Point(10, 66);
             this.idleProgressBar.Name = "idleProgressBar";
             this.idleProgressBar.Size = new System.Drawing.Size(359, 20);
             this.idleProgressBar.TabIndex = 21;
@@ -160,9 +147,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(372, 139);
+            this.ClientSize = new System.Drawing.Size(380, 117);
             this.Controls.Add(this.idleProgressBar);
-            this.Controls.Add(this.blueRoseVersionLabel);
             this.Controls.Add(this.parmaBox);
             this.Controls.Add(this.onlineBuildLabel);
             this.Controls.Add(this.latestBuild);
@@ -197,7 +183,6 @@
         private System.Windows.Forms.Label latestBuild;
         private System.Windows.Forms.Label onlineBuildLabel;
         private System.Windows.Forms.TextBox parmaBox;
-        private System.Windows.Forms.Label blueRoseVersionLabel;
         private System.Windows.Forms.ProgressBar idleProgressBar;
     }
 }

@@ -91,7 +91,7 @@ namespace BlueRose
             {
                 localBuild.Text = WhiteRose.ReadBuild(buildFile);
                 onlineBuildLabel.Text = "#" + WhiteRose.DistNumLegacy();
-                blueRoseVersionLabel.Text = "Blue Rose v" + WhiteRose.appVersion;
+                this.Text = "BlueRose v" + WhiteRose.appVersion;
 
 #if DEBUG
                 Ping pinger = new Ping();
@@ -173,6 +173,7 @@ namespace BlueRose
 
                 localBuild.Text = WhiteRose.ReadBuild(buildFile);
                 idleProgressBar.Style = ProgressBarStyle.Blocks;
+                btnUpdate.Text = "Update FreeSO";
             }
             catch (Exception ex)
             {
